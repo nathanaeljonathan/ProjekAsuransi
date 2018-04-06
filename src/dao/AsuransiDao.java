@@ -5,10 +5,12 @@
  */
 package dao;
 
+import entities.Asuransi;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import tools.HibernateUtil;
 
 /**
  *
@@ -16,38 +18,42 @@ import org.hibernate.Transaction;
  */
 public class AsuransiDao implements InterfaceDao {
 
-    public Session session;
     public SessionFactory factory;
+    public Session session;
     public Transaction transaction;
     public FunctionDao fdao;
+    
+    public AsuransiDao() {
+        this.fdao = new FunctionDao(HibernateUtil.getSessionFactory());
+    }
 
     @Override
     public boolean insert(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return fdao.insert(object);
     }
 
     @Override
     public boolean update(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.insert(object);
     }
 
     @Override
     public boolean delete(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.delete(Asuransi.class,object.toString());
     }
 
     @Override
     public List<Object> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.getAll("FROM Asuransi");
     }
 
     @Override
     public List<Object> search(String category, String search) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.getAll("FROM Asuransi WHERE " + category + " LIKE '%" + search + "%'");
     }
 
     @Override
     public Object getById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.getById("from Asuransi where idAsuransi='" + id + "'");
     }
 }

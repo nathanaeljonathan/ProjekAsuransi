@@ -12,7 +12,7 @@ package View;
 public class ViewMaster extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewAsuransi
+     * Creates new form Asuransi
      */
     public ViewMaster() {
         initComponents();
@@ -27,150 +27,112 @@ public class ViewMaster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        dekstopAs = new javax.swing.JDesktopPane();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        PaneAsuransi = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuHome = new javax.swing.JMenu();
-        menuAdmin = new javax.swing.JMenu();
-        menuMaster = new javax.swing.JMenu();
-        menuNasabah = new javax.swing.JMenuItem();
-        menuPolis = new javax.swing.JMenuItem();
-        menuAsuransi = new javax.swing.JMenuItem();
-        menuPembayaran = new javax.swing.JMenu();
-
-        jMenu5.setText("File");
-        jMenuBar2.add(jMenu5);
-
-        jMenu6.setText("Edit");
-        jMenuBar2.add(jMenu6);
-
-        jMenuItem1.setText("jMenuItem1");
+        jMenu1 = new javax.swing.JMenu();
+        MenuNasabah = new javax.swing.JMenuItem();
+        MenuAdmin = new javax.swing.JMenuItem();
+        MenuPolis = new javax.swing.JMenuItem();
+        MenuAsuransi = new javax.swing.JMenuItem();
+        MenuPembayaran = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        dekstopAs.setBackground(java.awt.Color.lightGray);
-        dekstopAs.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        dekstopAs.setForeground(new java.awt.Color(102, 102, 102));
-        dekstopAs.setToolTipText("Home Asuransi");
-        dekstopAs.setFocusTraversalPolicyProvider(true);
-        dekstopAs.setLayout(new javax.swing.OverlayLayout(dekstopAs));
+        jDesktopPane1.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
 
-        menuHome.setText("Home");
-        menuHome.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuHomeMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(menuHome);
+        javax.swing.GroupLayout PaneAsuransiLayout = new javax.swing.GroupLayout(PaneAsuransi);
+        PaneAsuransi.setLayout(PaneAsuransiLayout);
+        PaneAsuransiLayout.setHorizontalGroup(
+            PaneAsuransiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 782, Short.MAX_VALUE)
+        );
+        PaneAsuransiLayout.setVerticalGroup(
+            PaneAsuransiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 577, Short.MAX_VALUE)
+        );
 
-        menuAdmin.setText("Admin");
-        menuAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuAdminMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(menuAdmin);
+        getContentPane().add(PaneAsuransi, java.awt.BorderLayout.PAGE_START);
 
-        menuMaster.setText("Master");
+        jMenu1.setText("Master");
 
-        menuNasabah.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        menuNasabah.setText("Nasabah");
-        menuNasabah.addActionListener(new java.awt.event.ActionListener() {
+        MenuNasabah.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        MenuNasabah.setText("Nasabah");
+        MenuNasabah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuNasabahActionPerformed(evt);
+                MenuNasabahActionPerformed(evt);
             }
         });
-        menuMaster.add(menuNasabah);
+        jMenu1.add(MenuNasabah);
 
-        menuPolis.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        menuPolis.setText("Polis");
-        menuPolis.addActionListener(new java.awt.event.ActionListener() {
+        MenuAdmin.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        MenuAdmin.setText("Admin");
+        MenuAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPolisActionPerformed(evt);
+                MenuAdminActionPerformed(evt);
             }
         });
-        menuMaster.add(menuPolis);
+        jMenu1.add(MenuAdmin);
 
-        menuAsuransi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        menuAsuransi.setText("Asuransi");
-        menuAsuransi.addActionListener(new java.awt.event.ActionListener() {
+        MenuPolis.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        MenuPolis.setText("Polis");
+        MenuPolis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAsuransiActionPerformed(evt);
+                MenuPolisActionPerformed(evt);
             }
         });
-        menuMaster.add(menuAsuransi);
+        jMenu1.add(MenuPolis);
 
-        jMenuBar1.add(menuMaster);
-
-        menuPembayaran.setText("Pembayaran");
-        menuPembayaran.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuPembayaranMouseClicked(evt);
+        MenuAsuransi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
+        MenuAsuransi.setText("Asuransi");
+        MenuAsuransi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuAsuransiActionPerformed(evt);
             }
         });
-        jMenuBar1.add(menuPembayaran);
+        jMenu1.add(MenuAsuransi);
+
+        jMenuBar1.add(jMenu1);
+
+        MenuPembayaran.setText("Pembayaran");
+        MenuPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuPembayaranActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(MenuPembayaran);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(dekstopAs, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(dekstopAs, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        dekstopAs.getAccessibleContext().setAccessibleName("Home Asuransi");
-        dekstopAs.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuNasabahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNasabahActionPerformed
-        ViewNasabah frame = new ViewNasabah();
-        frame.show();
-        dekstopAs.add(frame);
-    }//GEN-LAST:event_menuNasabahActionPerformed
+    private void MenuNasabahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuNasabahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuNasabahActionPerformed
 
-    private void menuPolisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPolisActionPerformed
-        ViewPolis frame = new ViewPolis();
-        frame.show();
-        dekstopAs.add(frame);
-    }//GEN-LAST:event_menuPolisActionPerformed
+    private void MenuPolisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPolisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuPolisActionPerformed
 
-    private void menuAsuransiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAsuransiActionPerformed
-        ViewAsuransi frame = new ViewAsuransi();
-        frame.show();
-        dekstopAs.add(frame);
-    }//GEN-LAST:event_menuAsuransiActionPerformed
+    private void MenuAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAdminActionPerformed
+        ViewAdmin as = new ViewAdmin();
+        as.show();
+        PaneAsuransi.add(as);
+        as.setVisible(true);
+    }//GEN-LAST:event_MenuAdminActionPerformed
 
-    private void menuHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHomeMouseClicked
-        ViewHome frame = new ViewHome();
-        frame.show();
-        dekstopAs.add(frame);
-    }//GEN-LAST:event_menuHomeMouseClicked
+    private void MenuAsuransiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAsuransiActionPerformed
+        ViewAsuransi as = new ViewAsuransi();
+        as.show();
+        PaneAsuransi.add(as);
+        as.setVisible(true);
+    }//GEN-LAST:event_MenuAsuransiActionPerformed
 
-    private void menuAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAdminMouseClicked
-        ViewAdmin frame = new ViewAdmin();
-        frame.show();
-        dekstopAs.add(frame);
-    }//GEN-LAST:event_menuAdminMouseClicked
-
-    private void menuPembayaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPembayaranMouseClicked
-        ViewPembayaran frame = new ViewPembayaran();
-        frame.show();
-        dekstopAs.add(frame);
-    }//GEN-LAST:event_menuPembayaranMouseClicked
+    private void MenuPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPembayaranActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuPembayaranActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,18 +171,14 @@ public class ViewMaster extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane dekstopAs;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuItem MenuAdmin;
+    private javax.swing.JMenuItem MenuAsuransi;
+    private javax.swing.JMenuItem MenuNasabah;
+    private javax.swing.JMenu MenuPembayaran;
+    private javax.swing.JMenuItem MenuPolis;
+    private javax.swing.JDesktopPane PaneAsuransi;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenu menuAdmin;
-    private javax.swing.JMenuItem menuAsuransi;
-    private javax.swing.JMenu menuHome;
-    private javax.swing.JMenu menuMaster;
-    private javax.swing.JMenuItem menuNasabah;
-    private javax.swing.JMenu menuPembayaran;
-    private javax.swing.JMenuItem menuPolis;
     // End of variables declaration//GEN-END:variables
 }

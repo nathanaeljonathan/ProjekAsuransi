@@ -5,17 +5,29 @@
  */
 package View;
 
+import static com.sun.webkit.perf.WCFontPerfLogger.reset;
+import controller.AsuransiController;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author Medina
  */
 public class ViewAsuransi extends javax.swing.JInternalFrame {
+    private String header[]={"ID Asuransi", "Nama Asuransi"};
+    private String headerTable[] = {"idAsuransi", "nmAsuransi"};
+    public AsuransiController as;
+    private boolean hasil;
+    
 
     /**
      * Creates new form ViewAsuransi
      */
     public ViewAsuransi() {
         initComponents();
+        as = new AsuransiController();
+        as.bindingall(tblAsuransi, header);
     }
 
     /**
@@ -27,11 +39,11 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCari = new javax.swing.JButton();
+        cmbKategori = new javax.swing.JComboBox<>();
         txtCari = new javax.swing.JTextField();
+        btnCari = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAsuransi = new javax.swing.JTable();
-        jScrollBar1 = new javax.swing.JScrollBar();
         jPanel1 = new javax.swing.JPanel();
         lblKdAsuransi = new java.awt.Label();
         txtKdAsuransi = new javax.swing.JTextField();
@@ -40,18 +52,13 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
         btnHapus = new javax.swing.JButton();
         cmbJenis = new javax.swing.JComboBox<>();
 
-        setBackground(java.awt.Color.lightGray);
-        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setClosable(true);
-        setForeground(java.awt.Color.gray);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Data Asuransi");
-        setToolTipText("Data Asuransi");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.SE_RESIZE_CURSOR));
 
-        btnCari.setText("Cari");
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kode Asuransi", "Jenis Asuransi" }));
 
         txtCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +66,13 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
             }
         });
 
-        tblAsuransi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
+
         tblAsuransi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -80,6 +93,12 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
 
         lblKdAsuransi.setText("Kode Asuransi");
 
+        txtKdAsuransi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKdAsuransiKeyPressed(evt);
+            }
+        });
+
         lblJenis.setText("Jenis Asuransi");
 
         btnSimpan.setText("Simpan");
@@ -96,7 +115,7 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kesehatan", "Pendidikan", "Investasi", "Kendaraan" }));
+        cmbJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASURANSI KESEHATAN", "ASURANSI PENDIDIKAN", "ASURANSI INVESTASI", "ASURANSI KENDARAAN" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,85 +126,137 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblKdAsuransi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblJenis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbJenis, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtKdAsuransi, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSimpan))))
-                .addGap(74, 74, 74))
+                    .addComponent(txtKdAsuransi, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbJenis, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSimpan))
+                .addGap(231, 231, 231))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(btnSimpan)
-                .addGap(18, 18, 18)
-                .addComponent(btnHapus))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtKdAsuransi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtKdAsuransi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSimpan))
                     .addComponent(lblKdAsuransi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblJenis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbJenis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbJenis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnHapus)))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCari))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCari)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCari)
-                    .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCariActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtCariActionPerformed
 
     private void tblAsuransiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsuransiMouseClicked
-
+       txtKdAsuransi.setText(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 0)+"");
+       cmbJenis.setSelectedItem(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 0)+"");
+       txtKdAsuransi.setEnabled(false);
+       btnSimpan.setEnabled(true);
+       btnHapus.setEnabled(true);
     }//GEN-LAST:event_tblAsuransiMouseClicked
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
+        boolean hasil = false;
+        if (!txtKdAsuransi.isEnabled()) {
+            hasil = as.update(
+                txtKdAsuransi.getText(),
+                cmbJenis.getSelectedItem().toString());
+        }
+        else {
+            hasil = as.insert(
+                txtKdAsuransi.getText(),
+                cmbJenis.getSelectedItem().toString());
+        }
+        txtKdAsuransi.setEnabled(true);
+        btnSimpan.setEnabled(true);
+        String pesan = "gagal menginputkan data";
+        if (hasil) {
+            pesan = "berhasil menginputkan data";
+        }
+        JOptionPane.showMessageDialog(this, pesan);
+        as.bindingall(tblAsuransi, header);
+        reset();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
+        int i = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin dihapus ?");
+        System.out.println(i);
+        if (i == 0) {
+            String pesan = "Gagal hapus";
+            boolean hasil = as.delete(txtKdAsuransi.getText());
+            if (hasil)
+                pesan = "Selamat anda berhasil menhapus";
+            JOptionPane.showMessageDialog(this, pesan);
+            as.bindingall(tblAsuransi, header);
+        }
+        reset();
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void txtKdAsuransiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKdAsuransiKeyPressed
+        btnSimpan.setEnabled(true);
+        btnHapus.setEnabled(true);
+    }//GEN-LAST:event_txtKdAsuransiKeyPressed
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+
+        String kolom = "";
+        if (rootPaneCheckingEnabled) {
+            
+        }
+        switch(cmbKategori.getSelectedIndex()){
+            case 0:
+            kolom = "idAsuransi";
+            break;
+            case 1:
+            kolom = "nmAsuransi";
+            break;
+        }
+        as.bindingsearch(tblAsuransi, header, kolom, txtCari.getText());
+        System.out.println(cmbKategori.getSelectedItem()+"");
+    }//GEN-LAST:event_btnCariActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -193,8 +264,8 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox<String> cmbJenis;
+    private javax.swing.JComboBox<String> cmbKategori;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label lblJenis;
     private java.awt.Label lblKdAsuransi;
@@ -202,4 +273,13 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCari;
     private javax.swing.JTextField txtKdAsuransi;
     // End of variables declaration//GEN-END:variables
+
+    public void reset(){
+        txtKdAsuransi.setText("");
+        cmbJenis.setSelectedIndex(0);
+        txtCari.setText("");
+        btnSimpan.setEnabled(false);
+        btnHapus.setEnabled(false); 
+        txtKdAsuransi.setEnabled(true);
+    }
 }

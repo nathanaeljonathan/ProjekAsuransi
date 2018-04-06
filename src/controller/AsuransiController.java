@@ -6,41 +6,70 @@
 package controller;
 
 import dao.AsuransiDao;
+import entities.Asuransi;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ASUS A455L
  */
 public class AsuransiController {
-    private final AsuransiDao dao;
-
-    public AsuransiController(AsuransiDao dao) {
-        this.dao = dao;
+    
+    //public AsuransiDao asdao = new AsuransiDao();
+    
+    private final AsuransiDao as;
+    
+    public AsuransiController() {
+        this.as = new AsuransiDao();
+    }
+    
+    public void bindingall(JTable table, String[] header){
+        bindingTabels(table, header, as.getAll());
+    }
+    
+    private void bindingTabels(JTable table, String[] header, List<Object> datas){
+        DefaultTableModel model = new DefaultTableModel(header, 0);
+        Asuransi as;
+        for (Object data : datas){
+            as = (Asuransi) data;
+            Object[] data1 = {
+                as.getIdAsuransi(),
+                as.getNmAsuransi()
+            };
+            model.addRow(data1);
+        }
+        table.setModel(model);
+    }
+    
+    public boolean insert(String idAsuransi, String nmAsuransi) {
+        Asuransi asuransi = new Asuransi();
+        asuransi.setIdAsuransi(idAsuransi);
+        asuransi.setNmAsuransi(nmAsuransi);
+        
+        return as.insert(asuransi);
     }
 
-    public boolean insert(Object object) {
-        return dao.insert(object);
+    public boolean update(String idAsuransi, String nmAsuransi) {
+        Asuransi asuransi = new Asuransi();
+        asuransi.setIdAsuransi(idAsuransi);
+        asuransi.setNmAsuransi(nmAsuransi);
+        
+        return as.update(asuransi);
     }
 
-    public boolean update(Object object) {
-        return dao.update(object);
+    public boolean delete(String idAsuransi) {
+        return as.delete(idAsuransi);
     }
 
-    public boolean delete(Object object) {
-        return dao.delete(object);
-    }
-
-    public List<Object> getAll() {
-        return dao.getAll();
-    }
-
-    public List<Object> search(String category, String search) {
-        return dao.search(category, search);
+     public  void bindingsearch(JTable table, String[] header,
+        String category, String search){
+        bindingTabels(table, header, as.search(category, search));
     }
 
     public Object getById(String id) {
-        return dao.getById(id);
+        return as.getById(id);
     }
     
 }
