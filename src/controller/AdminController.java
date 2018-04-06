@@ -19,7 +19,7 @@ public class AdminController {
         this.ad = new AdminDao();
     }
 
-    public boolean insert(Object object) {
+    public boolean save(Object object) {
         return ad.insert(object);
     }
 
