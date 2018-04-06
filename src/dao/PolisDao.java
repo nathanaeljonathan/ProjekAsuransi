@@ -14,15 +14,11 @@ import org.hibernate.Transaction;
  *
  * @author ASUS A455L
  */
-public class AdminDao implements InterfaceDao {
-
+public class PolisDao implements InterfaceDao{
     public Session session;
     public SessionFactory factory;
     public Transaction transaction;
     public FunctionDao fdao;
-    
-    public AdminDao() {
-    }
 
     @Override
     public boolean insert(Object object) {

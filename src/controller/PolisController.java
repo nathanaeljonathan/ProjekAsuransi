@@ -5,42 +5,42 @@
  */
 package controller;
 
-import dao.NasabahDao;
+import dao.PolisDao;
 import java.util.List;
 
 /**
  *
  * @author ASUS A455L
  */
-public class NasabahController {
-    private final NasabahDao nd;
+public class PolisController {
+    private final PolisDao pd;
 
-    public NasabahController(NasabahDao nd) {
-        this.nd = nd;
+    public PolisController(PolisDao pd) {
+        this.pd = pd;
     }
 
     public boolean insert(Object object) {
-        return nd.insert(object);
+        return pd.insert(object);
     }
 
     public boolean update(Object object) {
-        return nd.update(object);
+        return pd.update(object);
     }
 
     public boolean delete(Object object) {
-        return nd.delete(object);
+        return pd.delete(object);
     }
 
     public List<Object> getAll() {
-        return nd.getAll();
+        return pd.getAll();
     }
 
     public List<Object> search(String category, String search) {
-        return nd.search(category, search);
+        return pd.search(category, search);
     }
 
     public Object getById(String id) {
-        return nd.getById(id);
+        return pd.getById(id);
     }
     
 }
