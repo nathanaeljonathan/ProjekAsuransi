@@ -6,42 +6,60 @@
 package controller;
 
 import dao.AdminDao;
+import entities.Admin;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ASUS A455L
  */
 public class AdminController {
+
     private final AdminDao ad;
 
     public AdminController() {
         this.ad = new AdminDao();
     }
 
-    public boolean save(Object object) {
-        return ad.insert(object);
+    public boolean save(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
+        Admin adm = new Admin(IdAdmin);
+        return ad.insert(adm);
     }
 
-    public boolean update(Object object) {
-        return ad.update(object);
+    public boolean update(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
+        Admin adm = new Admin(IdAdmin);
+        return ad.update(adm);
     }
 
-    public boolean delete(Object object) {
-        return ad.delete(object);
+    public boolean delete(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
+        Admin adm = new Admin(IdAdmin);
+        return ad.delete(adm);
     }
 
-    public List<Object> getAll() {
-        return ad.getAll();
+    public void bindingTable(JTable table, String[] header, List<Object> datas) {
+        DefaultTableModel model = new DefaultTableModel(header, 0);
+        Admin admin;
+        for (Object data : datas) {
+            admin = (Admin) data;
+            Object[] data1 = {
+                admin.getIdAdmin(),
+                admin.getNamaAdmin(),
+                admin.getAlamat(),
+                admin.getNoTelp(),
+                admin.getEmail(),};
+            model.addRow(data1);
+        }
+        table.setModel(model);
+
     }
 
-    public List<Object> search(String category, String search) {
-        return ad.search(category, search);
+    public void bindingSearch(JTable table, String[] header, String category, String cari) {
+        bindingTable(table, header, ad.search(category, cari));
     }
 
-    public Object getById(String id) {
-        return ad.getById(id);
+    public void bindingAll(JTable table, String[] header) {
+        bindingTable(table, header, ad.getAll());
     }
-    
-    
 }
