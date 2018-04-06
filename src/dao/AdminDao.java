@@ -5,11 +5,12 @@
  */
 package dao;
 
+import entities.Admin;
 import java.util.List;
-import java.util.Locale;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import tools.HibernateUtil;
 
 /**
  *
@@ -23,6 +24,7 @@ public class AdminDao implements InterfaceDao {
     public FunctionDao fdao;
     
     public AdminDao() {
+         this.fdao = new FunctionDao(HibernateUtil.getSessionFactory());
     }
 
     @Override
@@ -37,21 +39,21 @@ public class AdminDao implements InterfaceDao {
 
     @Override
     public boolean delete(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.delete(Admin.class,object.toString());
     }
     @Override
     public List<Object> getAll() {
-        return fdao.getAll("FROM admin");
+        return fdao.getAll("FROM Admin");
     }
 
     @Override
     public List<Object> search(String category, String cari) {
-        return fdao.getAll("FROM admin WHERE "+category+ " LIKE '%" + cari + "%'");
+        return fdao.getAll("FROM Admin WHERE " + category + " LIKE '%" + cari + "%'");
     }
 
     @Override
     public Object getById(String id) {
-        return fdao.getById("from admin where id_admin ='" + id + "'");
+        return fdao.getById("from Admin where id_admin ='" + id + "'");
     }
 
     

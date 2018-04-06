@@ -5,17 +5,31 @@
  */
 package View;
 
+import controller.AdminController;
+import dao.AdminDao;
+import java.util.HashSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Medina
  */
 public class ViewAdmin extends javax.swing.JInternalFrame {
 
+//    private String[] header={"No","ID","Name","Alamat","No"};
+    private String header[] = {"ID ADMIN","NAMA","ALAMAT","NO TELEPON","EMAIL"};
+    private String headerTitle[] = {"ID_ADMIN","NAMA_ADMIN","ALAMAT","N0_TELP","EMAIL"};
+    public AdminController adc;
+    private boolean hasil;
+
     /**
      * Creates new form ViewAdmin
      */
     public ViewAdmin() {
         initComponents();
+        adc = new AdminController();
+        adc.bindingAll(tblAdmin, header);
+        reset();
     }
 
     /**
@@ -45,6 +59,7 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
         txtEmail = new javax.swing.JTextField();
         btnSimpan = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
+        cmbKategori = new javax.swing.JComboBox<>();
 
         setBackground(java.awt.Color.lightGray);
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -58,7 +73,6 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.SE_RESIZE_CURSOR));
         setPreferredSize(new java.awt.Dimension(680, 345));
 
-        tblAdmin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         tblAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -82,6 +96,11 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
         });
 
         btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
 
         pnlAdmin.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Admin"));
 
@@ -92,8 +111,13 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
                 txtIdAdminActionPerformed(evt);
             }
         });
+        txtIdAdmin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIdAdminKeyPressed(evt);
+            }
+        });
 
-        lblNamaAdmin.setText("Nama Nasabah");
+        lblNamaAdmin.setText("Nama Admin");
 
         txtNamaAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,17 +176,17 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
                     .addComponent(txtAlamat)
                     .addComponent(txtNoTelp)
                     .addComponent(txtEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSimpan)
                     .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlAdminLayout.setVerticalGroup(
             pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAdminLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlAdminLayout.createSequentialGroup()
                         .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,53 +198,66 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlAdminLayout.createSequentialGroup()
                         .addComponent(btnSimpan)
                         .addGap(19, 19, 19)
                         .addComponent(btnHapus)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblNamaAdmin.getAccessibleContext().setAccessibleName("Nama Admin");
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nama" }));
+        cmbKategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbKategoriActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCari))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
-                    .addComponent(pnlAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCari)
+                .addGap(17, 17, 17))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlAdmin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCari)
-                    .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pnlAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(348, 348, 348)
+                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCari)
+                            .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -228,19 +265,48 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAdminMouseClicked
-
+        txtIdAdmin.setText(tblAdmin.getValueAt(tblAdmin.getSelectedRow(), 0).toString());
+        txtNamaAdmin.setText(tblAdmin.getValueAt(tblAdmin.getSelectedRow(), 1).toString());
+        txtAlamat.setText(tblAdmin.getValueAt(tblAdmin.getSelectedRow(), 2).toString());
+        txtNoTelp.setText(tblAdmin.getValueAt(tblAdmin.getSelectedRow(), 3).toString());
+        txtEmail.setText(tblAdmin.getValueAt(tblAdmin.getSelectedRow(), 4).toString());
+        txtIdAdmin.setEnabled(false);
+        btnSimpan.setEnabled(true);
+        btnHapus.setEnabled(true);
     }//GEN-LAST:event_tblAdminMouseClicked
 
     private void txtCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCariActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCariActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
+        int i = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin Ingin dihapus?");
+        if (i == 0) {
+            String pesan = "Gagal hapus";
+            boolean hasil = adc.delete(txtIdAdmin.getText());
+            if (hasil) {
+                pesan = "Hore Berhasil";
+            }
+            JOptionPane.showMessageDialog(this, pesan);
+            adc.bindingAll(tblAdmin, header);
+        }
+        reset();
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
+        boolean hasil = false;
+        if (!txtIdAdmin.isEnabled()) {
+            hasil = adc.update(txtIdAdmin.getText(), txtNamaAdmin.getText(), txtAlamat.getText(), txtNoTelp.getText(), txtEmail.getText());
+        } else {
+            hasil = adc.insert(txtIdAdmin.getText(), txtNamaAdmin.getText(), txtAlamat.getText(), txtNoTelp.getText(), txtEmail.getText());
+        }
+        String pesan = "gagal menginputkan data";
+        if (hasil) {
+            pesan = "behasil menginputkan data";
+        }
+        JOptionPane.showMessageDialog(this, pesan);
+        reset();
+        adc.bindingAll(tblAdmin, header);
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
@@ -259,11 +325,27 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdAdminActionPerformed
 
+    private void cmbKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbKategoriActionPerformed
+
+    private void txtIdAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdAdminKeyPressed
+        btnSimpan.setEnabled(true);
+        btnHapus.setEnabled(true);
+    }//GEN-LAST:event_txtIdAdminKeyPressed
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+      adc.bindingSearch(tblAdmin, header,
+                headerTitle[cmbKategori.getSelectedIndex()],
+                txtCari.getText());
+    }//GEN-LAST:event_btnCariActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
+    private javax.swing.JComboBox<String> cmbKategori;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label lblAlamat;
@@ -280,4 +362,15 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNamaAdmin;
     private javax.swing.JTextField txtNoTelp;
     // End of variables declaration//GEN-END:variables
+
+     public void reset(){
+        txtIdAdmin.setText("");
+        txtNamaAdmin.setText("");
+        txtAlamat.setText("");
+        txtNoTelp.setText("");
+        txtEmail.setText("");
+        txtCari.setText("");
+        btnSimpan.setEnabled(false);
+        btnHapus.setEnabled(false);
+    }
 }

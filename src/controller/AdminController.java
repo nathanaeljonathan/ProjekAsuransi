@@ -23,19 +23,28 @@ public class AdminController {
         this.ad = new AdminDao();
     }
 
-    public boolean save(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
-        Admin adm = new Admin(IdAdmin);
-        return ad.insert(adm);
-    }
-
     public boolean update(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
-        Admin adm = new Admin(IdAdmin);
+        Admin adm = new Admin();
+        adm.setIdAdmin(IdAdmin);
+        adm.setNamaAdmin(adminName);
+        adm.setAlamat(alamatAdm);
+        adm.setNoTelp(TelpAdm);
+        adm.setEmail(emailAdm);
         return ad.update(adm);
     }
 
-    public boolean delete(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
-        Admin adm = new Admin(IdAdmin);
-        return ad.delete(adm);
+     public boolean insert(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
+        Admin adm = new Admin();
+        adm.setIdAdmin(IdAdmin);
+        adm.setNamaAdmin(adminName);
+        adm.setAlamat(alamatAdm);
+        adm.setNoTelp(TelpAdm);
+        adm.setEmail(emailAdm);
+        return ad.insert(adm);
+    }
+
+    public boolean delete(String id) {
+        return ad.delete(id);
     }
 
     public void bindingTable(JTable table, String[] header, List<Object> datas) {
@@ -56,8 +65,14 @@ public class AdminController {
     }
 
     public void bindingSearch(JTable table, String[] header, String category, String cari) {
-        bindingTable(table, header, ad.search(category, cari));
-    }
+        String search = cari;
+            if (category.equalsIgnoreCase("idAdmin")) {
+                Admin a = (Admin) ad.search("namaAdmin", cari).get(0);                
+                search = a.getIdAdmin();
+            }
+            bindingTable(table, header, ad.search(category, cari));
+        }
+    
 
     public void bindingAll(JTable table, String[] header) {
         bindingTable(table, header, ad.getAll());

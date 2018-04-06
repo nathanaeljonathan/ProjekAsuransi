@@ -30,6 +30,7 @@ public class ViewMaster extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         dekstopAs = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuHome = new javax.swing.JMenu();
@@ -45,6 +46,8 @@ public class ViewMaster extends javax.swing.JFrame {
 
         jMenu6.setText("Edit");
         jMenuBar2.add(jMenu6);
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,14 +120,14 @@ public class ViewMaster extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(dekstopAs, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(dekstopAs, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(dekstopAs, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(dekstopAs, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         dekstopAs.getAccessibleContext().setAccessibleName("Home Asuransi");
@@ -211,6 +214,7 @@ public class ViewMaster extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAdmin;
     private javax.swing.JMenuItem menuAsuransi;
     private javax.swing.JMenu menuHome;

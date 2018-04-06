@@ -58,6 +58,10 @@ public class Admin implements Serializable {
         this.idAdmin = idAdmin;
     }
 
+    public Admin(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getIdAdmin() {
         return idAdmin;
     }
