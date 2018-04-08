@@ -7,7 +7,6 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -66,8 +63,6 @@ public class Nasabah implements Serializable {
     @JoinColumn(name = "ID_ADMIN", referencedColumnName = "ID_ADMIN")
     @ManyToOne(fetch = FetchType.LAZY)
     private Admin idAdmin;
-    @OneToMany(mappedBy = "noPolis", fetch = FetchType.LAZY)
-    private List<Pembayaran> pembayaranList;
 
     public Nasabah() {
     }
@@ -148,15 +143,6 @@ public class Nasabah implements Serializable {
         this.idAdmin = idAdmin;
     }
 
-    @XmlTransient
-    public List<Pembayaran> getPembayaranList() {
-        return pembayaranList;
-    }
-
-    public void setPembayaranList(List<Pembayaran> pembayaranList) {
-        this.pembayaranList = pembayaranList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -181,17 +167,5 @@ public class Nasabah implements Serializable {
     public String toString() {
         return "entities.Nasabah[ noPolis=" + noPolis + " ]";
     }
-
-//    public Nasabah(String ktp, String noPolis, String nmNasabah, Date tglLahir, String status, String pekerjaan, String penghasilan, String alamat, Admin idAdmin) {
-//        this.ktp = ktp;
-//        this.noPolis = noPolis;
-//        this.nmNasabah = nmNasabah;
-//        this.tglLahir = tglLahir;
-//        this.status = status;
-//        this.pekerjaan = pekerjaan;
-//        this.penghasilan = penghasilan;
-//        this.alamat = alamat;
-//        this.idAdmin = idAdmin;
-//    }
     
 }

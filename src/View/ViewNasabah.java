@@ -13,8 +13,10 @@ import javax.swing.JOptionPane;
  * @author Medina
  */
 public class ViewNasabah extends javax.swing.JInternalFrame {
-    private String header[] = {"No","KTP", "No Polis","Nama Nasabah","Tgl Lahir","Status","Pekerjaan","Penghasilan","Alamat","Admin"};
-    private String headerTable[] = {"ktp","noPolis","nmNasabah","tglLahir","status","pekerjaan","penghasilan","alamat","idAdmin"};
+    private String header[] = {"No","KTP", "No Polis","Nama Nasabah","Tgl Lahir","Status",
+        "Pekerjaan","Penghasilan","Alamat","Admin"};
+    private String headerTable[] = {"ktp","noPolis","nmNasabah","tglLahir","status",
+        "pekerjaan","penghasilan","alamat","idAdmin"};
     public NasabahController nn;
     private boolean hasil;
 
@@ -25,8 +27,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
         initComponents();
         nn = new NasabahController();
         nn.bindingAll(tblNasabah, header);
-        nn.loadAdmin(cmbIdAdmin);
-        reset();
+//        nn.loadAdmin(cmbIdAdmin);
     }
 
     /**
@@ -415,7 +416,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtKTPKeyPressed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        nn.bindingSearch(tblNasabah, header, headerTable[cmbKategori.getSelectedIndex()], txtCari.getText());
+        nn.Search(tblNasabah, header, headerTable[cmbKategori.getSelectedIndex()], txtCari.getText());
     }//GEN-LAST:event_btnCariActionPerformed
 
 

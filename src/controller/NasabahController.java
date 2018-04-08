@@ -94,12 +94,13 @@ public class NasabahController {
         return nd.getAll();
     }
 
-    public void bindingSearch(JTable table, String[] header, String category, String cari) {
+    public void Search(JTable table, String[] header, String category, String cari) {
         String search = cari;
         if (category.equalsIgnoreCase("idAdmin")) {
             Admin a = (Admin) ad.search("namaAdmin", cari).get(0);
             search = a.getIdAdmin().toString();
-        }
+        }        bindingTabels(table, header, nd.search(category, search));
+
         bindingTabels(table, header, nd.search(category, search));
     }
 
@@ -107,9 +108,9 @@ public class NasabahController {
         return nd.getById(id);
     }
     
-    public void loadAdmin(JComboBox jComboBox) {
-        ad.getAll().stream().map((object) -> (Admin) object).forEachOrdered((admin) -> {
-            jComboBox.addItem(admin.getIdAdmin());
-        });
-    }
+//    public void loadAdmin(JComboBox jComboBox) {
+//        ad.getAll().stream().map((object) -> (Admin) object).forEachOrdered((admin) -> {
+//            jComboBox.addItem(admin.getIdAdmin());
+//        });
+//    }
 }

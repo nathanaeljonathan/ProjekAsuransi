@@ -18,8 +18,8 @@ import tools.HibernateUtil;
  */
 public class NasabahDao implements InterfaceDao {
 
-    public Session session;
     public SessionFactory factory;
+    public Session session;
     public Transaction transaction;
     public FunctionDao fdao;
     

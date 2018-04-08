@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Medina
  */
 public class ViewAsuransi extends javax.swing.JInternalFrame {
-    private String header[]={"ID Asuransi", "Nama Asuransi"};
+    private String header[]={"No", "ID Asuransi", "Nama Asuransi"};
     private String headerTable[] = {"idAsuransi", "nmAsuransi"};
     public AsuransiController as;
     private boolean hasil;
@@ -191,8 +191,8 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCariActionPerformed
 
     private void tblAsuransiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsuransiMouseClicked
-       txtKdAsuransi.setText(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 0)+"");
-       cmbJenis.setSelectedItem(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 1)+"");
+       txtKdAsuransi.setText(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 1)+"");
+       cmbJenis.setSelectedItem(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 2)+"");
        txtKdAsuransi.setEnabled(false);
        btnSimpan.setEnabled(true);
        btnHapus.setEnabled(true);
