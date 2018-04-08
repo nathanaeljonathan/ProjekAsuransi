@@ -6,8 +6,8 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ASUS A455L
+ * @author Medina
  */
 @Entity
 @Table(name = "NASABAH")
@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Nasabah.findAll", query = "SELECT n FROM Nasabah n")
     , @NamedQuery(name = "Nasabah.findByKtp", query = "SELECT n FROM Nasabah n WHERE n.ktp = :ktp")
+    , @NamedQuery(name = "Nasabah.findByNoPolis", query = "SELECT n FROM Nasabah n WHERE n.noPolis = :noPolis")
     , @NamedQuery(name = "Nasabah.findByNmNasabah", query = "SELECT n FROM Nasabah n WHERE n.nmNasabah = :nmNasabah")
     , @NamedQuery(name = "Nasabah.findByTglLahir", query = "SELECT n FROM Nasabah n WHERE n.tglLahir = :tglLahir")
     , @NamedQuery(name = "Nasabah.findByStatus", query = "SELECT n FROM Nasabah n WHERE n.status = :status")
@@ -43,10 +44,12 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Nasabah implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
     @Column(name = "KTP")
     private String ktp;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "NO_POLIS")
+    private String noPolis;
     @Column(name = "NM_NASABAH")
     private String nmNasabah;
     @Column(name = "TGL_LAHIR")
@@ -63,14 +66,14 @@ public class Nasabah implements Serializable {
     @JoinColumn(name = "ID_ADMIN", referencedColumnName = "ID_ADMIN")
     @ManyToOne(fetch = FetchType.LAZY)
     private Admin idAdmin;
-    @OneToMany(mappedBy = "ktp", fetch = FetchType.LAZY)
-    private Collection<Polis> polisCollection;
+    @OneToMany(mappedBy = "noPolis", fetch = FetchType.LAZY)
+    private List<Pembayaran> pembayaranList;
 
     public Nasabah() {
     }
 
-    public Nasabah(String ktp) {
-        this.ktp = ktp;
+    public Nasabah(String noPolis) {
+        this.noPolis = noPolis;
     }
 
     public String getKtp() {
@@ -79,6 +82,14 @@ public class Nasabah implements Serializable {
 
     public void setKtp(String ktp) {
         this.ktp = ktp;
+    }
+
+    public String getNoPolis() {
+        return noPolis;
+    }
+
+    public void setNoPolis(String noPolis) {
+        this.noPolis = noPolis;
     }
 
     public String getNmNasabah() {
@@ -138,18 +149,18 @@ public class Nasabah implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Polis> getPolisCollection() {
-        return polisCollection;
+    public List<Pembayaran> getPembayaranList() {
+        return pembayaranList;
     }
 
-    public void setPolisCollection(Collection<Polis> polisCollection) {
-        this.polisCollection = polisCollection;
+    public void setPembayaranList(List<Pembayaran> pembayaranList) {
+        this.pembayaranList = pembayaranList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (ktp != null ? ktp.hashCode() : 0);
+        hash += (noPolis != null ? noPolis.hashCode() : 0);
         return hash;
     }
 
@@ -160,7 +171,7 @@ public class Nasabah implements Serializable {
             return false;
         }
         Nasabah other = (Nasabah) object;
-        if ((this.ktp == null && other.ktp != null) || (this.ktp != null && !this.ktp.equals(other.ktp))) {
+        if ((this.noPolis == null && other.noPolis != null) || (this.noPolis != null && !this.noPolis.equals(other.noPolis))) {
             return false;
         }
         return true;
@@ -168,7 +179,19 @@ public class Nasabah implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Nasabah[ ktp=" + ktp + " ]";
+        return "entities.Nasabah[ noPolis=" + noPolis + " ]";
     }
+
+//    public Nasabah(String ktp, String noPolis, String nmNasabah, Date tglLahir, String status, String pekerjaan, String penghasilan, String alamat, Admin idAdmin) {
+//        this.ktp = ktp;
+//        this.noPolis = noPolis;
+//        this.nmNasabah = nmNasabah;
+//        this.tglLahir = tglLahir;
+//        this.status = status;
+//        this.pekerjaan = pekerjaan;
+//        this.penghasilan = penghasilan;
+//        this.alamat = alamat;
+//        this.idAdmin = idAdmin;
+//    }
     
 }

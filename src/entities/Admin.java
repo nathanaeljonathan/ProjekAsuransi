@@ -6,7 +6,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ASUS A455L
+ * @author Medina
  */
 @Entity
 @Table(name = "ADMIN")
@@ -49,17 +49,13 @@ public class Admin implements Serializable {
     @Column(name = "EMAIL")
     private String email;
     @OneToMany(mappedBy = "idAdmin", fetch = FetchType.LAZY)
-    private Collection<Nasabah> nasabahCollection;
+    private List<Nasabah> nasabahList;
 
     public Admin() {
     }
 
     public Admin(String idAdmin) {
         this.idAdmin = idAdmin;
-    }
-
-    public Admin(String IdAdmin, String adminName, String alamatAdm, String TelpAdm, String emailAdm) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getIdAdmin() {
@@ -103,12 +99,12 @@ public class Admin implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Nasabah> getNasabahCollection() {
-        return nasabahCollection;
+    public List<Nasabah> getNasabahList() {
+        return nasabahList;
     }
 
-    public void setNasabahCollection(Collection<Nasabah> nasabahCollection) {
-        this.nasabahCollection = nasabahCollection;
+    public void setNasabahList(List<Nasabah> nasabahList) {
+        this.nasabahList = nasabahList;
     }
 
     @Override
@@ -133,7 +129,7 @@ public class Admin implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Admin[ idAdmin=" + idAdmin + " ]";
+        return "" + idAdmin + "";
     }
     
 }

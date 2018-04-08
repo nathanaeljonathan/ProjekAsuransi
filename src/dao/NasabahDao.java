@@ -5,10 +5,12 @@
  */
 package dao;
 
+import entities.Nasabah;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import tools.HibernateUtil;
 
 /**
  *
@@ -20,35 +22,38 @@ public class NasabahDao implements InterfaceDao {
     public SessionFactory factory;
     public Transaction transaction;
     public FunctionDao fdao;
+    
+    public NasabahDao(){
+        this.fdao = new FunctionDao(HibernateUtil.getSessionFactory());
+    }
 
     @Override
     public boolean insert(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.insert(object);
     }
 
     @Override
     public boolean update(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.insert(object);
     }
 
     @Override
     public boolean delete(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.delete(Nasabah.class,object.toString());
     }
 
     @Override
     public List<Object> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.getAll("FROM Nasabah");
     }
 
     @Override
     public List<Object> search(String category, String search) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.getAll("FROM Nasabah WHERE " + category + " LIKE '%" + search + "%'");
     }
 
     @Override
     public Object getById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.getById("from Nasabah where ktp='" + id + "'");
     }
-
 }

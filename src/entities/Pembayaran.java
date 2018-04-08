@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ASUS A455L
+ * @author Medina
  */
 @Entity
 @Table(name = "PEMBAYARAN")
@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pembayaran.findAll", query = "SELECT p FROM Pembayaran p")
     , @NamedQuery(name = "Pembayaran.findByNoPembayaran", query = "SELECT p FROM Pembayaran p WHERE p.noPembayaran = :noPembayaran")
     , @NamedQuery(name = "Pembayaran.findByTglPembayaran", query = "SELECT p FROM Pembayaran p WHERE p.tglPembayaran = :tglPembayaran")
-    , @NamedQuery(name = "Pembayaran.findByJmlBayar", query = "SELECT p FROM Pembayaran p WHERE p.jmlBayar = :jmlBayar")})
+    , @NamedQuery(name = "Pembayaran.findByJumlahBayar", query = "SELECT p FROM Pembayaran p WHERE p.jumlahBayar = :jumlahBayar")})
 public class Pembayaran implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,14 +43,14 @@ public class Pembayaran implements Serializable {
     @Column(name = "TGL_PEMBAYARAN")
     @Temporal(TemporalType.TIMESTAMP)
     private Date tglPembayaran;
-    @Column(name = "JML_BAYAR")
-    private String jmlBayar;
+    @Column(name = "JUMLAH_BAYAR")
+    private String jumlahBayar;
     @JoinColumn(name = "ID_ASURANSI", referencedColumnName = "ID_ASURANSI")
     @ManyToOne(fetch = FetchType.LAZY)
     private Asuransi idAsuransi;
     @JoinColumn(name = "NO_POLIS", referencedColumnName = "NO_POLIS")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Polis noPolis;
+    private Nasabah noPolis;
 
     public Pembayaran() {
     }
@@ -75,12 +75,12 @@ public class Pembayaran implements Serializable {
         this.tglPembayaran = tglPembayaran;
     }
 
-    public String getJmlBayar() {
-        return jmlBayar;
+    public String getJumlahBayar() {
+        return jumlahBayar;
     }
 
-    public void setJmlBayar(String jmlBayar) {
-        this.jmlBayar = jmlBayar;
+    public void setJumlahBayar(String jumlahBayar) {
+        this.jumlahBayar = jumlahBayar;
     }
 
     public Asuransi getIdAsuransi() {
@@ -91,11 +91,11 @@ public class Pembayaran implements Serializable {
         this.idAsuransi = idAsuransi;
     }
 
-    public Polis getNoPolis() {
+    public Nasabah getNoPolis() {
         return noPolis;
     }
 
-    public void setNoPolis(Polis noPolis) {
+    public void setNoPolis(Nasabah noPolis) {
         this.noPolis = noPolis;
     }
 

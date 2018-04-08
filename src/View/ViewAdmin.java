@@ -7,6 +7,7 @@ package View;
 
 import controller.AdminController;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
 
 /**
  *
@@ -57,6 +58,7 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
         txtCari = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
         cmbKategori = new javax.swing.JComboBox<>();
+        jScrollBar1 = new javax.swing.JScrollBar();
 
         setClosable(true);
         setIconifiable(true);
@@ -224,7 +226,8 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCari)
-                .addGap(36, 36, 36))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -241,7 +244,8 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCari)
                     .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(587, Short.MAX_VALUE))
+                .addContainerGap(591, Short.MAX_VALUE))
+            .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(40, 40, 40)
@@ -336,6 +340,7 @@ public class ViewAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JComboBox<String> cmbKategori;
+    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label lblAlamat;
     private java.awt.Label lblEmail;

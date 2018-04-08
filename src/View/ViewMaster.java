@@ -33,14 +33,12 @@ public class ViewMaster extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         MenuNasabah = new javax.swing.JMenuItem();
         MenuAdmin = new javax.swing.JMenuItem();
-        MenuPolis = new javax.swing.JMenuItem();
         MenuAsuransi = new javax.swing.JMenuItem();
         MenuPembayaran = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jDesktopPane1.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout PaneAsuransiLayout = new javax.swing.GroupLayout(PaneAsuransi);
         PaneAsuransi.setLayout(PaneAsuransiLayout);
@@ -50,10 +48,12 @@ public class ViewMaster extends javax.swing.JFrame {
         );
         PaneAsuransiLayout.setVerticalGroup(
             PaneAsuransiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+            .addGap(0, 1479, Short.MAX_VALUE)
         );
 
-        getContentPane().add(PaneAsuransi, java.awt.BorderLayout.PAGE_START);
+        jDesktopPane1.add(PaneAsuransi, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Master");
 
@@ -74,15 +74,6 @@ public class ViewMaster extends javax.swing.JFrame {
             }
         });
         jMenu1.add(MenuAdmin);
-
-        MenuPolis.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        MenuPolis.setText("Polis");
-        MenuPolis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuPolisActionPerformed(evt);
-            }
-        });
-        jMenu1.add(MenuPolis);
 
         MenuAsuransi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
         MenuAsuransi.setText("Asuransi");
@@ -109,12 +100,11 @@ public class ViewMaster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuNasabahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuNasabahActionPerformed
-        // TODO add your handling code here:
+        ViewNasabah as = new ViewNasabah();
+        as.show();
+        PaneAsuransi.add(as);
+        as.setVisible(true);
     }//GEN-LAST:event_MenuNasabahActionPerformed
-
-    private void MenuPolisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPolisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuPolisActionPerformed
 
     private void MenuAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAdminActionPerformed
         ViewAdmin as = new ViewAdmin();
@@ -175,7 +165,6 @@ public class ViewMaster extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuAsuransi;
     private javax.swing.JMenuItem MenuNasabah;
     private javax.swing.JMenu MenuPembayaran;
-    private javax.swing.JMenuItem MenuPolis;
     private javax.swing.JDesktopPane PaneAsuransi;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;

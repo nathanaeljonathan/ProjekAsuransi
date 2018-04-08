@@ -5,8 +5,14 @@
  */
 package controller;
 
+import dao.AdminDao;
 import dao.NasabahDao;
+import entities.Admin;
+import entities.Nasabah;
 import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,33 +20,96 @@ import java.util.List;
  */
 public class NasabahController {
     private final NasabahDao nd;
+    private final AdminDao ad;
 
-    public NasabahController(NasabahDao nd) {
-        this.nd = nd;
+    public NasabahController(){
+        this.nd = new NasabahDao();
+        this.ad = new AdminDao();
+    }
+    
+    private void bindingTabels(JTable table, String[] header, List<Object> datas){
+        DefaultTableModel model = new DefaultTableModel(header, 0);
+        int i = 1;
+//        Nasabah na;
+        for (Object data : datas){
+            Nasabah na = (Nasabah) data;
+            String admin = "";
+            if (na.getIdAdmin() != null) {
+                admin = na.getIdAdmin().getNamaAdmin();
+            }
+            Object[] data1 = {
+                i++,
+                na.getKtp(),
+                na.getNoPolis(),
+                na.getNmNasabah(),
+                na.getTglLahir(),
+                na.getStatus(),
+                na.getPekerjaan(),
+                na.getPenghasilan(),
+                na.getAlamat(),
+                na.getIdAdmin()
+            };
+            model.addRow(data1);
+        }
+        table.setModel(model);
+    }
+    
+    public void bindingAll(JTable table, String[] header) {
+        bindingTabels(table, header, nd.getAll());
+    }
+    
+    public boolean insert(String ktp, String noPolis, String nmNasabah, String tglLahir, String status, String pekerjaan, String penghasilan, String alamat, String idAdmin) {
+          Nasabah n = new Nasabah();
+          n.setKtp(ktp);
+          n.setNoPolis(noPolis);
+          n.setNmNasabah(nmNasabah);
+          n.setTglLahir(new java.sql.Date(new Long(tglLahir)));
+          n.setStatus(status);
+          n.setPekerjaan(pekerjaan);
+          n.setPenghasilan(penghasilan);
+          n.setAlamat(alamat);
+          n.setIdAdmin(new Admin(idAdmin));
+          return nd.insert(n);    
     }
 
-    public boolean insert(Object object) {
-        return nd.insert(object);
+    public boolean update(String ktp, String noPolis, String nmNasabah, String tglLahir, String status, String pekerjaan, String penghasilan, String alamat, String idAdmin) {
+          Nasabah n = new Nasabah();
+          n.setKtp(ktp);
+          n.setNoPolis(noPolis);
+          n.setNmNasabah(nmNasabah);
+          n.setTglLahir(new java.sql.Date(new Long(tglLahir)));
+          n.setStatus(status);
+          n.setPekerjaan(pekerjaan);
+          n.setPenghasilan(penghasilan);
+          n.setAlamat(alamat);
+          n.setIdAdmin(new Admin(idAdmin));
+          return nd.update(n);
     }
 
-    public boolean update(Object object) {
-        return nd.update(object);
-    }
-
-    public boolean delete(Object object) {
-        return nd.delete(object);
+    public boolean delete(String ktp) {
+        return nd.delete(ktp);
     }
 
     public List<Object> getAll() {
         return nd.getAll();
     }
 
-    public List<Object> search(String category, String search) {
-        return nd.search(category, search);
+    public void bindingSearch(JTable table, String[] header, String category, String cari) {
+        String search = cari;
+        if (category.equalsIgnoreCase("idAdmin")) {
+            Admin a = (Admin) ad.search("namaAdmin", cari).get(0);
+            search = a.getIdAdmin().toString();
+        }
+        bindingTabels(table, header, nd.search(category, search));
     }
 
     public Object getById(String id) {
         return nd.getById(id);
     }
     
+    public void loadAdmin(JComboBox jComboBox) {
+        ad.getAll().stream().map((object) -> (Admin) object).forEachOrdered((admin) -> {
+            jComboBox.addItem(admin.getIdAdmin());
+        });
+    }
 }

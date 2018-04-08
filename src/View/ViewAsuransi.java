@@ -192,7 +192,7 @@ public class ViewAsuransi extends javax.swing.JInternalFrame {
 
     private void tblAsuransiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsuransiMouseClicked
        txtKdAsuransi.setText(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 0)+"");
-       cmbJenis.setSelectedItem(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 0)+"");
+       cmbJenis.setSelectedItem(tblAsuransi.getValueAt(tblAsuransi.getSelectedRow(), 1)+"");
        txtKdAsuransi.setEnabled(false);
        btnSimpan.setEnabled(true);
        btnHapus.setEnabled(true);

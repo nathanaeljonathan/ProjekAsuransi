@@ -5,17 +5,28 @@
  */
 package View;
 
+import controller.NasabahController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Medina
  */
 public class ViewNasabah extends javax.swing.JInternalFrame {
+    private String header[] = {"No","KTP", "No Polis","Nama Nasabah","Tgl Lahir","Status","Pekerjaan","Penghasilan","Alamat","Admin"};
+    private String headerTable[] = {"ktp","noPolis","nmNasabah","tglLahir","status","pekerjaan","penghasilan","alamat","idAdmin"};
+    public NasabahController nn;
+    private boolean hasil;
 
     /**
      * Creates new form ViewNasabah
      */
     public ViewNasabah() {
         initComponents();
+        nn = new NasabahController();
+        nn.bindingAll(tblNasabah, header);
+        nn.loadAdmin(cmbIdAdmin);
+        reset();
     }
 
     /**
@@ -38,19 +49,27 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
         lblAlamat = new java.awt.Label();
         txtKTP = new javax.swing.JTextField();
         txtNamaNasabah = new javax.swing.JTextField();
-        txtTglLahir = new javax.swing.JTextField();
         cmbStatus = new javax.swing.JComboBox<>();
         txtPekerjaan = new javax.swing.JTextField();
         txtPenghasilan = new javax.swing.JTextField();
         txtAlamat = new javax.swing.JTextField();
         btnSimpan = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
-        txtIdAdmin = new javax.swing.JTextField();
+        lblNoPolis = new java.awt.Label();
+        txtNoPolis = new javax.swing.JTextField();
+        cmbIdAdmin = new javax.swing.JComboBox<>();
+        txtTglLahir = new com.toedter.calendar.JDateChooser();
         cmbKategori = new javax.swing.JComboBox<>();
         txtCari = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNasabah = new javax.swing.JTable();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Data Nasabah");
 
         pnlNasabah.setBorder(javax.swing.BorderFactory.createTitledBorder("Detail Nasabah"));
         pnlNasabah.setToolTipText("Detail Nasabah");
@@ -71,6 +90,12 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
         lblPenghasilan.setText("Penghasilan");
 
         lblAlamat.setText("Alamat");
+
+        txtKTP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKTPKeyPressed(evt);
+            }
+        });
 
         txtNamaNasabah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +130,15 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
             }
         });
 
+        lblNoPolis.setText("No Polis");
+
+        cmbIdAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADM01", "ADM02", "ADM03" }));
+        cmbIdAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbIdAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlNasabahLayout = new javax.swing.GroupLayout(pnlNasabah);
         pnlNasabah.setLayout(pnlNasabahLayout);
         pnlNasabahLayout.setHorizontalGroup(
@@ -112,79 +146,100 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
             .addGroup(pnlNasabahLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblKTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNamaNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPekerjaan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPenghasilan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlNasabahLayout.createSequentialGroup()
-                        .addComponent(txtKTP, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(121, Short.MAX_VALUE))
-                    .addGroup(pnlNasabahLayout.createSequentialGroup()
-                        .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNamaNasabah)
-                            .addComponent(txtTglLahir)
-                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPekerjaan)
-                            .addComponent(txtPenghasilan)
-                            .addComponent(txtAlamat)
-                            .addComponent(txtIdAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSimpan)
-                            .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35))))
+                            .addComponent(lblTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPekerjaan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPenghasilan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlNasabahLayout.createSequentialGroup()
+                                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtPekerjaan, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                                        .addComponent(txtPenghasilan)
+                                        .addComponent(txtAlamat))
+                                    .addComponent(cmbIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSimpan)
+                                    .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(22, 22, 22))
+                            .addGroup(pnlNasabahLayout.createSequentialGroup()
+                                .addComponent(txtTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(pnlNasabahLayout.createSequentialGroup()
+                        .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlNasabahLayout.createSequentialGroup()
+                                .addComponent(lblNamaNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(txtNamaNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlNasabahLayout.createSequentialGroup()
+                                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblKTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNoPolis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(66, 66, 66)
+                                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtKTP, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNoPolis, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())))
         );
         pnlNasabahLayout.setVerticalGroup(
             pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNasabahLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(41, 41, 41)
+                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlNasabahLayout.createSequentialGroup()
+                        .addComponent(lblKTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNoPolis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlNasabahLayout.createSequentialGroup()
+                        .addComponent(txtKTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNoPolis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
+                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNamaNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNamaNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlNasabahLayout.createSequentialGroup()
                         .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnHapus)
                             .addGroup(pnlNasabahLayout.createSequentialGroup()
-                                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(pnlNasabahLayout.createSequentialGroup()
-                                        .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(pnlNasabahLayout.createSequentialGroup()
-                                                .addComponent(lblKTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(lblNamaNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pnlNasabahLayout.createSequentialGroup()
-                                                .addComponent(txtKTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(txtNamaNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTglLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNasabahLayout.createSequentialGroup()
                                         .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblPekerjaan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtPekerjaan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtPekerjaan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlNasabahLayout.createSequentialGroup()
                                 .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblPenghasilan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPenghasilan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnSimpan)))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnHapus)))
-                    .addComponent(lblIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNasabahLayout.createSequentialGroup()
+                                .addComponent(btnSimpan)
+                                .addGap(15, 15, 15))))
+                    .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KTP", "Nama Nasabah" }));
@@ -201,6 +256,11 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
         });
 
         btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
 
         tblNasabah.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -241,11 +301,10 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addComponent(pnlNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -253,7 +312,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
                         .addComponent(btnCari)
                         .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(637, Short.MAX_VALUE)))
+                    .addContainerGap(589, Short.MAX_VALUE)))
         );
 
         pack();
@@ -272,11 +331,54 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPekerjaanActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
+        boolean hasil = false;
+        if (!txtKTP.isEnabled()) {
+            hasil = nn.update(
+                txtKTP.getText(),
+                txtNoPolis.getText(),
+                txtNamaNasabah.getText(),
+                txtTglLahir.getDate().getTime()+"",
+                cmbStatus.getSelectedItem().toString(),
+                txtPekerjaan.getText(),
+                txtPenghasilan.getText(),
+                txtAlamat.getText(),
+                cmbIdAdmin.getSelectedItem().toString());
+        }
+        else {
+            hasil = nn.insert(
+                txtKTP.getText(),
+                txtNoPolis.getText(),
+                txtNamaNasabah.getText(),
+                txtTglLahir.getDate().getTime()+"",
+                cmbStatus.getSelectedItem().toString(),
+                txtPekerjaan.getText(),
+                txtPenghasilan.getText(),
+                txtAlamat.getText(),
+                cmbIdAdmin.getSelectedItem().toString());
+        }
+        txtKTP.setEnabled(true);
+        btnSimpan.setEnabled(true);
+        String pesan = "gagal menginputkan data";
+        if (hasil) {
+            pesan = "berhasil menginputkan data";
+        }
+        JOptionPane.showMessageDialog(this, pesan);
+        nn.bindingAll(tblNasabah, header);
+        reset();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
+        int i = JOptionPane.showConfirmDialog(this, "Apakah anda yakin akan menghapus data ini?");
+        if (i==0) {
+            String pesan = "Gagal Hapus";
+            boolean hasil = nn.delete(txtKTP.getText());
+            if (hasil){
+                pesan = "Berhasil Hapus";
+            }
+            JOptionPane.showMessageDialog(this, pesan);
+            nn.bindingAll(tblNasabah, header);
+        }
+        reset();
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void cmbKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKategoriActionPerformed
@@ -288,14 +390,40 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCariActionPerformed
 
     private void tblNasabahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNasabahMouseClicked
-
+       txtKTP.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 1)+"");
+       txtNoPolis.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 2)+"");
+       txtNamaNasabah.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 3)+"");
+//       txtTglLahir.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 4)+"");
+       cmbStatus.setSelectedItem(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 5)+"");
+       txtPekerjaan.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 6)+"");
+       txtPenghasilan.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 7)+"");
+       txtAlamat.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 8)+"");
+       cmbIdAdmin.setSelectedItem(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 9)+"");
+       txtKTP.setEnabled(false);
+       btnSimpan.setEnabled(true);
+       btnHapus.setEnabled(true);
     }//GEN-LAST:event_tblNasabahMouseClicked
+
+    private void cmbIdAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIdAdminActionPerformed
+
+    }//GEN-LAST:event_cmbIdAdminActionPerformed
+
+    private void txtKTPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKTPKeyPressed
+        // TODO add your handling code here:
+        btnSimpan.setEnabled(true);
+        btnHapus.setEnabled(true);
+    }//GEN-LAST:event_txtKTPKeyPressed
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        nn.bindingSearch(tblNasabah, header, headerTable[cmbKategori.getSelectedIndex()], txtCari.getText());
+    }//GEN-LAST:event_btnCariActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
+    private javax.swing.JComboBox<String> cmbIdAdmin;
     private javax.swing.JComboBox<String> cmbKategori;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JScrollPane jScrollPane1;
@@ -303,6 +431,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     private java.awt.Label lblIdAdmin;
     private java.awt.Label lblKTP;
     private java.awt.Label lblNamaNasabah;
+    private java.awt.Label lblNoPolis;
     private java.awt.Label lblPekerjaan;
     private java.awt.Label lblPenghasilan;
     private java.awt.Label lblStatus;
@@ -311,11 +440,27 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblNasabah;
     private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtCari;
-    private javax.swing.JTextField txtIdAdmin;
     private javax.swing.JTextField txtKTP;
     private javax.swing.JTextField txtNamaNasabah;
+    private javax.swing.JTextField txtNoPolis;
     private javax.swing.JTextField txtPekerjaan;
     private javax.swing.JTextField txtPenghasilan;
-    private javax.swing.JTextField txtTglLahir;
+    private com.toedter.calendar.JDateChooser txtTglLahir;
     // End of variables declaration//GEN-END:variables
+
+public void reset(){
+        txtKTP.setText("");
+        txtNamaNasabah.setText("");
+        txtNoPolis.setText("");
+        txtAlamat.setText("");
+        txtPekerjaan.setText("");
+        txtPenghasilan.setText("");
+        txtTglLahir.getDate().getTime();
+        cmbIdAdmin.setSelectedIndex(0);
+        cmbStatus.setSelectedIndex(0);
+        txtCari.setText("");
+        btnSimpan.setEnabled(false);
+        btnHapus.setEnabled(false); 
+        txtKTP.setEnabled(true);
+    }
 }
