@@ -55,7 +55,7 @@
                   <Component id="txtCari" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="btnCari" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="575" max="32767" attributes="0"/>
+              <EmptySpace pref="579" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
@@ -94,11 +94,13 @@
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtJmlPembayaran" alignment="0" pref="302" max="32767" attributes="0"/>
-                              <Component id="txtPembayaran" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtNoPolis" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtKdAsuransi" alignment="1" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtJmlPembayaran" alignment="0" pref="302" max="32767" attributes="0"/>
+                                  <Component id="txtPembayaran" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtNoPolis" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="cmbAsuransi" min="-2" pref="205" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnSimpan" min="-2" pref="143" max="-2" attributes="0"/>
@@ -137,8 +139,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblKdAsuransi" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtKdAsuransi" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblKdAsuransi" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbAsuransi" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -188,8 +190,6 @@
             <Property name="text" type="java.lang.String" value="Kode Asuransi"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtKdAsuransi">
-        </Component>
         <Component class="javax.swing.JButton" name="btnSimpan">
           <Properties>
             <Property name="text" type="java.lang.String" value="Bayar"/>
@@ -199,6 +199,24 @@
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="txtTglBayar">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbAsuransi">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="ASR01 - ASURANSI KESEHATAN"/>
+                <StringItem index="1" value="ASR02 - ASURANSI PENDIDIKAN"/>
+                <StringItem index="2" value="ASR03 - ASURANSI INVESTASI"/>
+                <StringItem index="3" value="ASR04 - ASURANSI KENDARAAN"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAsuransiActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

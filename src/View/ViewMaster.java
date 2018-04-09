@@ -34,8 +34,11 @@ public class ViewMaster extends javax.swing.JFrame {
         MenuNasabah = new javax.swing.JMenuItem();
         MenuAdmin = new javax.swing.JMenuItem();
         MenuAsuransi = new javax.swing.JMenuItem();
-        MenuBayar = new javax.swing.JMenuItem();
         MenuPembayaran = new javax.swing.JMenu();
+        MenuBayar = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        MenuReport_Transaksi = new javax.swing.JMenuItem();
+        MenuReport_Nasabah = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,23 +88,47 @@ public class ViewMaster extends javax.swing.JFrame {
         });
         jMenu1.add(MenuAsuransi);
 
+        jMenuBar1.add(jMenu1);
+
+        MenuPembayaran.setText("Transaksi");
+        MenuPembayaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuPembayaranActionPerformed(evt);
+            }
+        });
+
+        MenuBayar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         MenuBayar.setText("Bayar");
         MenuBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuBayarActionPerformed(evt);
             }
         });
-        jMenu1.add(MenuBayar);
+        MenuPembayaran.add(MenuBayar);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(MenuPembayaran);
 
-        MenuPembayaran.setText("Pembayaran");
-        MenuPembayaran.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.setText("Report");
+
+        MenuReport_Transaksi.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        MenuReport_Transaksi.setText("Transaksi");
+        MenuReport_Transaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuPembayaranActionPerformed(evt);
+                MenuReport_TransaksiActionPerformed(evt);
             }
         });
-        jMenuBar1.add(MenuPembayaran);
+        jMenu2.add(MenuReport_Transaksi);
+
+        MenuReport_Nasabah.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK));
+        MenuReport_Nasabah.setText("Nasabah");
+        MenuReport_Nasabah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuReport_NasabahActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MenuReport_Nasabah);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -142,6 +169,20 @@ public class ViewMaster extends javax.swing.JFrame {
         PaneAsuransi.add(as);
         as.setVisible(true);
     }//GEN-LAST:event_MenuBayarActionPerformed
+
+    private void MenuReport_TransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuReport_TransaksiActionPerformed
+        ViewReport_Transaksi as = new ViewReport_Transaksi();
+        as.show();
+        PaneAsuransi.add(as);
+        as.setVisible(true);
+    }//GEN-LAST:event_MenuReport_TransaksiActionPerformed
+
+    private void MenuReport_NasabahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuReport_NasabahActionPerformed
+        ViewReport_Nasabah as = new ViewReport_Nasabah();
+        as.show();
+        PaneAsuransi.add(as);
+        as.setVisible(true);
+    }//GEN-LAST:event_MenuReport_NasabahActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,9 +226,12 @@ public class ViewMaster extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuBayar;
     private javax.swing.JMenuItem MenuNasabah;
     private javax.swing.JMenu MenuPembayaran;
+    private javax.swing.JMenuItem MenuReport_Nasabah;
+    private javax.swing.JMenuItem MenuReport_Transaksi;
     private javax.swing.JDesktopPane PaneAsuransi;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

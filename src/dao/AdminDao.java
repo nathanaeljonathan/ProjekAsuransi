@@ -54,7 +54,5 @@ public class AdminDao implements InterfaceDao {
     @Override
     public Object getById(String id) {
         return fdao.getById("from Admin where id_admin ='" + id + "'");
-    }
-
-    
+    } 
 }
