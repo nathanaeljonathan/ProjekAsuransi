@@ -5,17 +5,26 @@
  */
 package View;
 
+import controller.PembayaranController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Medina
  */
 public class ViewPembayaran extends javax.swing.JInternalFrame {
+    private String header[] = {"NO", "No Pembayaran","Tgl Pembayaran","Jumlah Pembayaran", "No Polis","Kd Asuransi"};
+    private String headerTable[] = {"noPembayaran","tglPembayaran","jumlahBayar","noPolis","idAsuransi"};
+    public PembayaranController pc;
+    private boolean hasil;
 
     /**
      * Creates new form ViewPembayaran
      */
     public ViewPembayaran() {
         initComponents();
+        pc = new PembayaranController();
+        pc.bindingAll(tblPembayaran, header);
     }
 
     /**
@@ -31,7 +40,6 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
         lblPemabayaran = new java.awt.Label();
         txtPembayaran = new javax.swing.JTextField();
         lblTglPembayaran = new java.awt.Label();
-        txtTglPembayaran = new javax.swing.JTextField();
         lblJmlPembayaran = new java.awt.Label();
         txtJmlPembayaran = new javax.swing.JTextField();
         lblNoPolis = new java.awt.Label();
@@ -40,6 +48,7 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
         txtKdAsuransi = new javax.swing.JTextField();
         btnSimpan = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
+        txtTglBayar = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPembayaran = new javax.swing.JTable();
         cmbKategori = new javax.swing.JComboBox<>();
@@ -50,13 +59,13 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
 
         lblPemabayaran.setText("Nomor Pembayaran");
 
-        lblTglPembayaran.setText("Tanggal Pembayaran");
-
-        txtTglPembayaran.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTglPembayaranActionPerformed(evt);
+        txtPembayaran.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPembayaranKeyPressed(evt);
             }
         });
+
+        lblTglPembayaran.setText("Tanggal Pembayaran");
 
         lblJmlPembayaran.setText("Jumlah Pembayaran");
 
@@ -105,31 +114,34 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtJmlPembayaran, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                                    .addComponent(txtPembayaran, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNoPolis, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtKdAsuransi))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSimpan)))
+                        .addGap(54, 54, 54))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtJmlPembayaran, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                            .addComponent(txtTglPembayaran, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPembayaran, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNoPolis, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtKdAsuransi))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSimpan)))
-                .addGap(54, 54, 54))
+                        .addComponent(txtTglBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPemabayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTglPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtTglPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPemabayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTglPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTglBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblJmlPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,8 +197,8 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(240, 240, 240)
+                .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,7 +220,7 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
                     .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCari))
-                .addContainerGap(571, Short.MAX_VALUE))
+                .addContainerGap(575, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(40, 40, 40)
@@ -221,10 +233,6 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTglPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTglPembayaranActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTglPembayaranActionPerformed
-
     private void txtJmlPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJmlPembayaranActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtJmlPembayaranActionPerformed
@@ -234,7 +242,30 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNoPolisActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
+        boolean hasil = false;
+        if (!txtPembayaran.isEnabled()) {
+            hasil = pc.update(txtPembayaran.getText(),
+                    txtNoPolis.getText(),
+                    txtTglBayar.getDate().getTime()+"",
+                    txtJmlPembayaran.getText(),
+                    txtKdAsuransi.getText());
+        }
+        else{
+            hasil = pc.insert(txtPembayaran.getText(),
+                    txtNoPolis.getText(),
+                    txtTglBayar.getDate().getTime()+"",
+                    txtJmlPembayaran.getText(),
+                    txtKdAsuransi.getText());
+        }
+        txtPembayaran.setEnabled(true);
+        btnSimpan.setEnabled(true);
+        String pesan = "gagal menginputkan data";
+        if (hasil) {
+            pesan = "berhasil menginputkan data";
+        }
+        JOptionPane.showMessageDialog(this, pesan);
+        pc.bindingAll(tblPembayaran, header);
+        reset();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
@@ -242,7 +273,14 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void tblPembayaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembayaranMouseClicked
-
+       txtPembayaran.setText(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 0)+"");
+//       txtTglBayar.setDate(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 1)+"");
+       txtJmlPembayaran.setText(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 2)+"");
+       txtNoPolis.setText(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 3)+"");
+       txtKdAsuransi.setText(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 4)+"");
+       txtPembayaran.setEnabled(false);
+       btnSimpan.setEnabled(true);
+       btnHapus.setEnabled(true);
     }//GEN-LAST:event_tblPembayaranMouseClicked
 
     private void cmbKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKategoriActionPerformed
@@ -252,6 +290,11 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     private void txtCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCariActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCariActionPerformed
+
+    private void txtPembayaranKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPembayaranKeyPressed
+        btnSimpan.setEnabled(true);
+        btnHapus.setEnabled(true);
+    }//GEN-LAST:event_txtPembayaranKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -272,6 +315,18 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtKdAsuransi;
     private javax.swing.JTextField txtNoPolis;
     private javax.swing.JTextField txtPembayaran;
-    private javax.swing.JTextField txtTglPembayaran;
+    private com.toedter.calendar.JDateChooser txtTglBayar;
     // End of variables declaration//GEN-END:variables
+
+public void reset(){
+        txtPembayaran.setText("");
+        txtNoPolis.setText("");
+        txtTglBayar.getDate().getTime();
+        txtJmlPembayaran.setText("");
+        txtKdAsuransi.setText("");
+        txtCari.setText("");
+        btnSimpan.setEnabled(false);
+        btnHapus.setEnabled(false); 
+        txtPembayaran.setEnabled(true);
+    }
 }

@@ -86,15 +86,15 @@ public class NasabahController {
           return nd.update(n);
     }
 
-    public boolean delete(String ktp) {
-        return nd.delete(ktp);
+    public boolean delete(String noPolis) {
+        return nd.delete(noPolis);
     }
 
     public List<Object> getAll() {
         return nd.getAll();
     }
 
-    public void Search(JTable table, String[] header, String category, String cari) {
+    public void bindingSearch(JTable table, String[] header, String category, String cari) {
         String search = cari;
         if (category.equalsIgnoreCase("idAdmin")) {
             Admin a = (Admin) ad.search("namaAdmin", cari).get(0);

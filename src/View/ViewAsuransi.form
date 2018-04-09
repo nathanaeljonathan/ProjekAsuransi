@@ -27,7 +27,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="cmbKategori" min="-2" pref="118" max="-2" attributes="0"/>
+              <Component id="cmbKategori" min="-2" pref="134" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="txtCari" min="-2" pref="205" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>

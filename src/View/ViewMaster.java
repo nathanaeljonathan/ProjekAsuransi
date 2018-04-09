@@ -34,6 +34,7 @@ public class ViewMaster extends javax.swing.JFrame {
         MenuNasabah = new javax.swing.JMenuItem();
         MenuAdmin = new javax.swing.JMenuItem();
         MenuAsuransi = new javax.swing.JMenuItem();
+        MenuBayar = new javax.swing.JMenuItem();
         MenuPembayaran = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,6 +85,14 @@ public class ViewMaster extends javax.swing.JFrame {
         });
         jMenu1.add(MenuAsuransi);
 
+        MenuBayar.setText("Bayar");
+        MenuBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBayarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MenuBayar);
+
         jMenuBar1.add(jMenu1);
 
         MenuPembayaran.setText("Pembayaran");
@@ -121,8 +130,18 @@ public class ViewMaster extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuAsuransiActionPerformed
 
     private void MenuPembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPembayaranActionPerformed
-        // TODO add your handling code here:
+        ViewPembayaran as = new ViewPembayaran();
+        as.show();
+        PaneAsuransi.add(as);
+        as.setVisible(true);
     }//GEN-LAST:event_MenuPembayaranActionPerformed
+
+    private void MenuBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBayarActionPerformed
+        ViewPembayaran as = new ViewPembayaran();
+        as.show();
+        PaneAsuransi.add(as);
+        as.setVisible(true);
+    }//GEN-LAST:event_MenuBayarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,6 +182,7 @@ public class ViewMaster extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuAdmin;
     private javax.swing.JMenuItem MenuAsuransi;
+    private javax.swing.JMenuItem MenuBayar;
     private javax.swing.JMenuItem MenuNasabah;
     private javax.swing.JMenu MenuPembayaran;
     private javax.swing.JDesktopPane PaneAsuransi;
