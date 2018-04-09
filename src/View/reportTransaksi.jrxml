@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9424eec-5035-4558-b0c2-38367443027e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     ADMIN."ID_ADMIN" AS ADMIN_ID_ADMIN,
+     ASURANSI."ID_ASURANSI" AS ASURANSI_ID_ASURANSI,
+     ASURANSI."NM_ASURANSI" AS ASURANSI_NM_ASURANSI,
+     NASABAH."KTP" AS NASABAH_KTP,
+     NASABAH."ID_ADMIN" AS NASABAH_ID_ADMIN,
+     NASABAH."NM_NASABAH" AS NASABAH_NM_NASABAH,
+     NASABAH."TGL_LAHIR" AS NASABAH_TGL_LAHIR,
+     NASABAH."STATUS" AS NASABAH_STATUS,
+     NASABAH."PEKERJAAN" AS NASABAH_PEKERJAAN,
+     NASABAH."PENGHASILAN" AS NASABAH_PENGHASILAN,
+     NASABAH."ALAMAT" AS NASABAH_ALAMAT,
+     NASABAH."NO_POLIS" AS NASABAH_NO_POLIS,
+     PEMBAYARAN."NO_PEMBAYARAN" AS PEMBAYARAN_NO_PEMBAYARAN,
+     PEMBAYARAN."TGL_PEMBAYARAN" AS PEMBAYARAN_TGL_PEMBAYARAN,
+     PEMBAYARAN."JML_BAYAR" AS PEMBAYARAN_JML_BAYAR,
+     PEMBAYARAN."NO_POLIS" AS PEMBAYARAN_NO_POLIS,
+     PEMBAYARAN."ID_ASURANSI" AS PEMBAYARAN_ID_ASURANSI,
+     ADMIN."NAMA_ADMIN" AS ADMIN_NAMA_ADMIN
+FROM
+     "HR"."ADMIN" ADMIN INNER JOIN "HR"."NASABAH" NASABAH ON ADMIN."ID_ADMIN" = NASABAH."ID_ADMIN"
+     INNER JOIN "HR"."PEMBAYARAN" PEMBAYARAN ON NASABAH."NO_POLIS" = PEMBAYARAN."NO_POLIS"
+     INNER JOIN "HR"."ASURANSI" ASURANSI ON PEMBAYARAN."ID_ASURANSI" = ASURANSI."ID_ASURANSI"]]>
+	</queryString>
+	<field name="ADMIN_ID_ADMIN" class="java.lang.String"/>
+	<field name="ASURANSI_ID_ASURANSI" class="java.lang.String"/>
+	<field name="ASURANSI_NM_ASURANSI" class="java.lang.String"/>
+	<field name="NASABAH_KTP" class="java.lang.String"/>
+	<field name="NASABAH_ID_ADMIN" class="java.lang.String"/>
+	<field name="NASABAH_NM_NASABAH" class="java.lang.String"/>
+	<field name="NASABAH_TGL_LAHIR" class="java.sql.Timestamp"/>
+	<field name="NASABAH_STATUS" class="java.lang.String"/>
+	<field name="NASABAH_PEKERJAAN" class="java.lang.String"/>
+	<field name="NASABAH_PENGHASILAN" class="java.lang.String"/>
+	<field name="NASABAH_ALAMAT" class="java.lang.String"/>
+	<field name="NASABAH_NO_POLIS" class="java.lang.String"/>
+	<field name="PEMBAYARAN_NO_PEMBAYARAN" class="java.lang.String"/>
+	<field name="PEMBAYARAN_TGL_PEMBAYARAN" class="java.sql.Timestamp"/>
+	<field name="PEMBAYARAN_JML_BAYAR" class="java.lang.String"/>
+	<field name="PEMBAYARAN_NO_POLIS" class="java.lang.String"/>
+	<field name="PEMBAYARAN_ID_ASURANSI" class="java.lang.String"/>
+	<field name="ADMIN_NAMA_ADMIN" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="126" y="0" width="305" height="53" uuid="7ac0cb7d-8513-414c-9805-31802250eb81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="24" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN TRANSAKSI]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="5d58ade9-cf70-4a71-bb21-70dc9123d69c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="0" width="61" height="20" uuid="334e7891-4514-4a12-ab06-4bb8523ab330"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[No Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="0" width="65" height="20" uuid="5d31820c-da25-4e5d-95e6-e005b58bea25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[No Polis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="0" width="83" height="20" uuid="b91ef3aa-aeae-40b0-93a2-da895ded702c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="0" width="69" height="20" uuid="e7985b81-6d7a-4a81-b5a6-6cdaa40b9fa7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="0" width="130" height="20" uuid="408d47b4-9354-43ff-9438-74670c3bb22c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Asuransi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="0" width="101" height="20" uuid="9a7d6cd9-e463-47c0-b3db-51aec6d2e4f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="7" width="61" height="20" uuid="f9fbd2dd-bf10-40d9-a2d8-c5a612e7b04e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{PEMBAYARAN_NO_PEMBAYARAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="82" y="7" width="65" height="20" uuid="c0c5e6b2-f424-4162-9e43-8e255aee0c30"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{PEMBAYARAN_NO_POLIS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="7" width="83" height="20" uuid="38d48091-1537-498c-abe5-f8aa8b03e3f9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_NM_NASABAH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="7" width="69" height="20" uuid="730b3f6f-df8c-4e71-9dd8-91973248d3a4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{PEMBAYARAN_JML_BAYAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="7" width="130" height="20" uuid="0966df43-c99b-48bb-8ba2-12c38175852a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ASURANSI_NM_ASURANSI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="7" width="101" height="20" uuid="36c04e4d-3a97-48aa-a86e-c8b77494822a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{PEMBAYARAN_TGL_PEMBAYARAN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="431" y="0" width="80" height="20" uuid="1ccd1e09-61ca-4e67-8b7a-a8a32d066a7b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="511" y="0" width="40" height="20" uuid="81fff749-0954-4d3e-b461-5ed1072af52a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
