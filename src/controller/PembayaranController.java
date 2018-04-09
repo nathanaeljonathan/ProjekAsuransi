@@ -85,8 +85,18 @@ public class PembayaranController {
     }
 
     public void bindingSearch(JTable table, String[] header, String category, String cari) {
-//        String search = cari;
-//        if(category.equalsIgnoreCase(""))
+       String search = cari;
+        if (category.equalsIgnoreCase("noPolis")) {
+            Nasabah nas = (Nasabah) nd.search("nmNasabah", cari).get(0);
+            search = nas.getNoPolis();
+        } else if (category.equalsIgnoreCase("idAsuransi")) {
+            List<Object> asuransi = ad.search("nmAsuransi", cari);
+            Asuransi as = (Asuransi) asuransi.get(0);
+            
+            search = as.getIdAsuransi();
+        }
+        bindingTable(table, header, pd.search(category, search));
+
     }
 
     public Object getById(String id) {

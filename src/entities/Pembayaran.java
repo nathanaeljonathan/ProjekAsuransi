@@ -43,7 +43,7 @@ public class Pembayaran implements Serializable {
     @Column(name = "TGL_PEMBAYARAN")
     @Temporal(TemporalType.TIMESTAMP)
     private Date tglPembayaran;
-    @Column(name = "JUMLAH_BAYAR")
+    @Column(name = "JML_BAYAR")
     private String jumlahBayar;
     @JoinColumn(name = "ID_ASURANSI", referencedColumnName = "ID_ASURANSI")
     @ManyToOne(fetch = FetchType.LAZY)

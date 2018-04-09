@@ -231,7 +231,7 @@
           <StringArray count="3">
             <StringItem index="0" value="No Pembayaran"/>
             <StringItem index="1" value="No Polis"/>
-            <StringItem index="2" value="Kode Asuransi"/>
+            <StringItem index="2" value="Asuransi"/>
           </StringArray>
         </Property>
       </Properties>
@@ -251,6 +251,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cari"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCariActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

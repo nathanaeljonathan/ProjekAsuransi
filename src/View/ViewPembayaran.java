@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class ViewPembayaran extends javax.swing.JInternalFrame {
     private String header[] = {"NO","No Pembayaran","Tgl Pembayaran","Jumlah Pembayaran", "No Polis","Asuransi"};
-    private String headerTable[] = {"noPembayaran","tglPembayaran","jumlahBayar","noPolis","idAsuransi"};
+    private String headerTable[] = {"NO_PEMBAYARAN","NO_POLIS","ID_ASURANSI"};
     public PembayaranController pc;
     private boolean hasil;
 
@@ -166,7 +166,7 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblPembayaran);
 
-        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Pembayaran", "No Polis", "Kode Asuransi" }));
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Pembayaran", "No Polis", "Asuransi" }));
         cmbKategori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbKategoriActionPerformed(evt);
@@ -180,6 +180,11 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
         });
 
         btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,12 +277,18 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbKategoriActionPerformed
 
     private void txtCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCariActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtCariActionPerformed
 
     private void txtPembayaranKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPembayaranKeyPressed
         btnSimpan.setEnabled(true);
     }//GEN-LAST:event_txtPembayaranKeyPressed
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+         pc.bindingSearch(tblPembayaran, header, 
+                headerTable[cmbKategori.getSelectedIndex()], 
+                txtCari.getText());
+    }//GEN-LAST:event_btnCariActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
