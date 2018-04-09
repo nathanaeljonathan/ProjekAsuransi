@@ -58,11 +58,11 @@ FROM
 	<title>
 		<band height="44" splitType="Stretch">
 			<staticText>
-				<reportElement x="129" y="3" width="279" height="40" uuid="40c9f217-a42d-402b-a834-306ef9bb98e4"/>
+				<reportElement x="129" y="3" width="306" height="40" uuid="40c9f217-a42d-402b-a834-306ef9bb98e4"/>
 				<textElement>
 					<font fontName="MS UI Gothic" size="30"/>
 				</textElement>
-				<text><![CDATA[LAPORAN NASABAH]]></text>
+				<text><![CDATA[LAPORAN TRANSAKSI]]></text>
 			</staticText>
 		</band>
 	</title>

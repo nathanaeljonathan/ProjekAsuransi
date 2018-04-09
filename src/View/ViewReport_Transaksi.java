@@ -6,6 +6,15 @@
 package View;
 
 import controller.PembayaranController;
+import java.io.File;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -46,6 +55,7 @@ public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Report Transaksi");
 
         tblReport_Transaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,7 +82,13 @@ public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
             }
         });
 
+        btnPrint.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnPrint.setText("Print");
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,17 +102,16 @@ public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCari)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnPrint)
-                                .addGap(257, 257, 257))))))
+                        .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCari)
+                        .addGap(18, 18, 18))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +123,9 @@ public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
                     .addComponent(btnCari))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(29, 29, 29)
                 .addComponent(btnPrint)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,6 +140,34 @@ public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
                 headerTable[cmbKategori.getSelectedIndex()], 
                 txtCari.getText());
     }//GEN-LAST:event_btnCariActionPerformed
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        try {
+            String path = "View/ReportNasabah.jasper";
+            String driver="oracle.jdbc.OracleDriver";
+            String konek="jdbc:oracle:thin:@localhost:1521:XE";
+            String user="system";
+            String password="21051996";
+            HashMap parameter = new HashMap();
+            Class.forName(driver);
+            Connection conn = DriverManager.getConnection(konek,user,password);
+            File reportFile=new File(path);
+            InputStream jReport = this.getClass().getClassLoader().getResourceAsStream(reportFile.getPath());
+//            JasperReport jReport = (JasperReport) JRLoader.loadObjectFromFile(reportFile.getPath());
+            JasperPrint jPrint = JasperFillManager.fillReport(jReport, parameter, conn);
+//            JasperViewer.viewReport(jPrint, true);
+            JasperViewer viewer = new JasperViewer(jPrint);
+            JasperViewer.setDefaultLookAndFeelDecorated(true);
+//            cr.add(viewer);
+//            cr.show();
+            viewer.setVisible(true);
+//            Desktop.add(viewer);
+//            cr.setEnabled(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Laporan Tidak Dapat Dicetak!\n" + e.getMessage()
+            ,"Cetak Laporan", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPrintActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
