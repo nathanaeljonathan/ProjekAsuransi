@@ -5,17 +5,25 @@
  */
 package View;
 
+import controller.NasabahController;
+
 /**
  *
  * @author Medina
  */
 public class ViewReport_Nasabah extends javax.swing.JInternalFrame {
+    private String header[] ={"No","KTP","No Polis","Nama Nasabah","Pekerjaan","Alamat","Admin"};
+    private String headerTable[] ={"noPolis","nmNasabah","idAdmin"};
+    public NasabahController nc;
+    private boolean hasil;
 
     /**
      * Creates new form ViewReport_Nasabah
      */
     public ViewReport_Nasabah() {
         initComponents();
+        nc = new NasabahController();
+        nc.bindingAllReport(tblReport_Transaksi, header);
     }
 
     /**
@@ -58,6 +66,11 @@ public class ViewReport_Nasabah extends javax.swing.JInternalFrame {
         cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Polis", "Nama Nasabah", "Nama Admin" }));
 
         btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
 
         btnPrint.setText("Print");
 
@@ -103,6 +116,12 @@ public class ViewReport_Nasabah extends javax.swing.JInternalFrame {
     private void tblReport_TransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReport_TransaksiMouseClicked
 
     }//GEN-LAST:event_tblReport_TransaksiMouseClicked
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        nc.bindingSearchReport(tblReport_Transaksi, header, 
+                headerTable[cmbKategori.getSelectedIndex()], 
+                txtCari.getText());
+    }//GEN-LAST:event_btnCariActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -53,9 +53,35 @@ public class NasabahController {
         }
         table.setModel(model);
     }
+    private void bindingTabelsReport(JTable table, String[] header, List<Object> datas){
+        DefaultTableModel model = new DefaultTableModel(header, 0);
+        int i = 1;
+//        Nasabah na;
+        for (Object data : datas){
+            Nasabah na = (Nasabah) data;
+            String admin = "";
+            if (na.getIdAdmin() != null) {
+                admin = na.getIdAdmin().getNamaAdmin();
+            }
+            Object[] data1 = {
+                i++,
+                na.getKtp(),
+                na.getNoPolis(),
+                na.getNmNasabah(),
+                na.getPekerjaan(),
+                na.getAlamat(),
+                na.getIdAdmin().getNamaAdmin()
+            };
+            model.addRow(data1);
+        }
+        table.setModel(model);
+    }
     
     public void bindingAll(JTable table, String[] header) {
         bindingTabels(table, header, nd.getAll());
+    }
+    public void bindingAllReport(JTable table, String[] header) {
+        bindingTabelsReport(table, header, nd.getAll());
     }
     
     public boolean insert(String ktp, String noPolis, String nmNasabah, String tglLahir, String status, String pekerjaan, String penghasilan, String alamat, String idAdmin) {
@@ -103,14 +129,24 @@ public class NasabahController {
 
         bindingTabels(table, header, nd.search(category, search));
     }
+    public void bindingSearchReport(JTable table, String[] header, String category, String cari) {
+        String search = cari;
+        if (category.equalsIgnoreCase("idAdmin")) {
+            Admin a = (Admin) ad.search("namaAdmin", cari).get(0);
+            search = a.getIdAdmin().toString();
+        }        bindingTabelsReport(table, header, nd.search(category, search));
+
+        bindingTabelsReport(table, header, nd.search(category, search));
+    }
 
     public Object getById(String id) {
         return nd.getById(id);
     }
     
-//    public void loadAdmin(JComboBox jComboBox) {
-//        ad.getAll().stream().map((object) -> (Admin) object).forEachOrdered((admin) -> {
-//            jComboBox.addItem(admin.getIdAdmin());
-//        });
-//    }
+    public void loadAdmin(JComboBox jComboBox) {
+        jComboBox.addItem(" - ");
+        ad.getAll().stream().map((object) -> (Admin) object).forEachOrdered((admin) -> {
+            jComboBox.addItem(admin.getIdAdmin());
+        });
+    }
 }

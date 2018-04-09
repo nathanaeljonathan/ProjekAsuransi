@@ -96,7 +96,7 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbAsuransi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASR01 - ASURANSI KESEHATAN", "ASR02 - ASURANSI PENDIDIKAN", "ASR03 - ASURANSI INVESTASI", "ASR04 - ASURANSI KENDARAAN" }));
+        cmbAsuransi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASR01", "ASR02", "ASR03", "ASR04" }));
         cmbAsuransi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAsuransiActionPerformed(evt);

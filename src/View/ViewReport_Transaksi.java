@@ -5,17 +5,25 @@
  */
 package View;
 
+import controller.PembayaranController;
+
 /**
  *
  * @author Medina
  */
 public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
+    private String header[] = {"NO","No Pembayaran","No Polis","Nama","Jumlah Pembayaran", "Asuransi","Tgl Pembayaran"};
+    private String headerTable[] = {"NO_PEMBAYARAN","NO_POLIS","ID_ASURANSI"};
+    public PembayaranController pc;
+    private boolean hasil;
 
     /**
      * Creates new form ViewReport_Transaksi
      */
     public ViewReport_Transaksi() {
         initComponents();
+        pc = new PembayaranController();
+        pc.bindingAllR(tblReport_Transaksi, header);
     }
 
     /**
@@ -55,9 +63,14 @@ public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblReport_Transaksi);
 
-        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Polis", "Tanggal Pembayaran", "Asuransi" }));
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Bayar", "No Polis", "Asuransi" }));
 
         btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariActionPerformed(evt);
+            }
+        });
 
         btnPrint.setText("Print");
 
@@ -106,6 +119,12 @@ public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
     private void tblReport_TransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReport_TransaksiMouseClicked
 
     }//GEN-LAST:event_tblReport_TransaksiMouseClicked
+
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        pc.bindingSearchReport(tblReport_Transaksi, header, 
+                headerTable[cmbKategori.getSelectedIndex()], 
+                txtCari.getText());
+    }//GEN-LAST:event_btnCariActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

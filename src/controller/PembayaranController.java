@@ -98,8 +98,49 @@ public class PembayaranController {
         bindingTable(table, header, pd.search(category, search));
 
     }
+    public void bindingSearchReport(JTable table, String[] header, String category, String cari) {
+       String search = cari;
+        if (category.equalsIgnoreCase("noPolis")) {
+            Nasabah nas = (Nasabah) nd.search("nmNasabah", cari).get(0);
+            search = nas.getNoPolis();
+        } else if (category.equalsIgnoreCase("idAsuransi")) {
+            List<Object> asuransi = ad.search("nmAsuransi", cari);
+            Asuransi as = (Asuransi) asuransi.get(0);
+            
+            search = as.getIdAsuransi();
+        }
+        bindingTableReport(table, header, pd.search(category, search));
+
+    }
 
     public Object getById(String id) {
         return pd.getById(id);
+    }
+    
+    private void bindingTableReport(JTable table, String[] header, List<Object> datas) {
+        DefaultTableModel model = new DefaultTableModel(header, 0);
+        int i = 1;
+        for (Object data : datas) {
+            Pembayaran pm = (Pembayaran) data;
+            String nasabah = "";
+            if (pm.getNoPolis() != null) {
+                nasabah = pm.getNoPolis().toString();
+            }
+            Object[] data1 = {
+                i++,
+                pm.getNoPembayaran(),
+                pm.getNoPolis(),
+                pm.getNoPolis().getNmNasabah(),
+                pm.getJumlahBayar(),
+                pm.getIdAsuransi().getNmAsuransi(),
+                pm.getTglPembayaran()
+            };
+            model.addRow(data1);
+        }
+        table.setModel(model);
+    }
+    
+    public void bindingAllR(JTable table, String[] header){
+        bindingTableReport(table, header,pd.getAll());
     }
 }
