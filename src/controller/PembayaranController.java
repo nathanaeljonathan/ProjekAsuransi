@@ -49,7 +49,7 @@ public class PembayaranController {
                 pm.getTglPembayaran(),
                 pm.getJumlahBayar(),
                 pm.getNoPolis(),
-                pm.getIdAsuransi()
+                pm.getIdAsuransi().getNmAsuransi()
             };
             model.addRow(data1);
         }
@@ -84,13 +84,12 @@ public class PembayaranController {
         return pd.getAll();
     }
 
-    public List<Object> search(String category, String search) {
-        return pd.search(category, search);
+    public void bindingSearch(JTable table, String[] header, String category, String cari) {
+//        String search = cari;
+//        if(category.equalsIgnoreCase(""))
     }
 
     public Object getById(String id) {
         return pd.getById(id);
     }
-    
-    
 }
