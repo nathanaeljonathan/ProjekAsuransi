@@ -458,6 +458,7 @@ private void reset(){
         txtKTP.setEnabled(true);
     }
 
+
     private List<String> getCombo(boolean isAdmin){
         List<String> isi = new ArrayList<>();
         String[] daftar = new String[datas.size()];
