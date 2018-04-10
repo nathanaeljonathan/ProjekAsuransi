@@ -56,11 +56,11 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="44" splitType="Stretch">
+		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="129" y="3" width="306" height="40" uuid="40c9f217-a42d-402b-a834-306ef9bb98e4"/>
+				<reportElement x="116" y="8" width="340" height="40" uuid="40c9f217-a42d-402b-a834-306ef9bb98e4"/>
 				<textElement>
-					<font fontName="MS UI Gothic" size="30"/>
+					<font fontName="MS UI Gothic" size="30" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[LAPORAN TRANSAKSI]]></text>
 			</staticText>
@@ -77,27 +77,45 @@ FROM
 	<columnHeader>
 		<band height="21" splitType="Stretch">
 			<staticText>
-				<reportElement x="279" y="0" width="88" height="20" uuid="67a00e2f-ca32-4f66-bab0-368c5bdb530f"/>
+				<reportElement x="207" y="0" width="77" height="20" uuid="67a00e2f-ca32-4f66-bab0-368c5bdb530f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
 				<text><![CDATA[Jumlah Bayar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="0" width="92" height="20" uuid="8ee9e587-6dca-4065-a00c-1065f11fd8fc"/>
+				<reportElement x="2" y="0" width="61" height="20" uuid="8ee9e587-6dca-4065-a00c-1065f11fd8fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
 				<text><![CDATA[No Bayar]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="94" y="0" width="73" height="20" uuid="dcb6e6a5-83b0-47c6-a110-4fb027f0ff86"/>
+				<reportElement x="63" y="0" width="53" height="20" uuid="dcb6e6a5-83b0-47c6-a110-4fb027f0ff86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
 				<text><![CDATA[No Polis]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="167" y="0" width="112" height="20" uuid="fb347b6d-a71b-402c-a4aa-7f65d15aa0b1"/>
+				<reportElement x="116" y="0" width="91" height="20" uuid="fb347b6d-a71b-402c-a4aa-7f65d15aa0b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
 				<text><![CDATA[Nama Nasabah]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="367" y="0" width="80" height="20" uuid="b2c65e68-c84f-4550-b8f6-b19fcaa25269"/>
+				<reportElement x="284" y="1" width="141" height="20" uuid="b2c65e68-c84f-4550-b8f6-b19fcaa25269"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
 				<text><![CDATA[Asuransi]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="447" y="1" width="107" height="20" uuid="ef3fe125-2d8e-4d82-a5e0-6cbf13655dd9"/>
+				<reportElement x="425" y="0" width="130" height="20" uuid="ef3fe125-2d8e-4d82-a5e0-6cbf13655dd9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
 				<text><![CDATA[Tanggal Pembayaran]]></text>
 			</staticText>
 		</band>
@@ -105,28 +123,34 @@ FROM
 	<detail>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="94" height="20" uuid="c7f837aa-d62b-4bd3-a852-56e5fa2cd8bb"/>
+				<reportElement x="0" y="0" width="63" height="20" uuid="c7f837aa-d62b-4bd3-a852-56e5fa2cd8bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PEMBAYARAN_NO_PEMBAYARAN}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="94" y="0" width="73" height="20" uuid="85561828-03c8-4316-8c8f-1d10e8b39276"/>
-				<textFieldExpression><![CDATA[$F{NASABAH_NO_POLIS}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="167" y="0" width="112" height="20" uuid="1a6a3ffb-dc1d-4a79-a222-15eb0518ad08"/>
+				<reportElement x="116" y="0" width="91" height="20" uuid="1a6a3ffb-dc1d-4a79-a222-15eb0518ad08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{NASABAH_NM_NASABAH}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="279" y="0" width="88" height="20" uuid="84d03bb9-d1b0-4dde-94ff-16a70b7cec6f"/>
+				<reportElement x="207" y="0" width="77" height="20" uuid="84d03bb9-d1b0-4dde-94ff-16a70b7cec6f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PEMBAYARAN_JUMLAH_BAYAR}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="367" y="0" width="80" height="20" uuid="10fc1deb-f24e-4529-ba59-8d28d3c600b5"/>
+				<reportElement x="284" y="1" width="141" height="20" uuid="10fc1deb-f24e-4529-ba59-8d28d3c600b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ASURANSI_NM_ASURANSI}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="447" y="0" width="107" height="20" uuid="39a4aa69-7936-4001-8e15-b265f21fb9ea"/>
+				<reportElement x="425" y="1" width="130" height="20" uuid="39a4aa69-7936-4001-8e15-b265f21fb9ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{PEMBAYARAN_TGL_PEMBAYARAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="53" height="20" uuid="85561828-03c8-4316-8c8f-1d10e8b39276"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_NO_POLIS}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -334,7 +334,7 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
 private void reset(){
         txtPembayaran.setText("");
         txtNoPolis.setText("");
-//        txtTglBayar.getDate().getTime();
+        txtTglBayar.setDate(new Date());
         txtJmlPembayaran.setText("");
         cmbAsuransi.setSelectedIndex(0);
         txtCari.setText("");

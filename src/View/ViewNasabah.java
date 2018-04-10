@@ -449,7 +449,7 @@ private void reset(){
         txtAlamat.setText("");
         txtPekerjaan.setText("");
         txtPenghasilan.setText("");
-//        txtTglLahir.getDate().getTime();
+        txtTglLahir.setDate(new Date());
         cmbIdAdmin.setSelectedIndex(0);
         cmbStatus.setSelectedIndex(0);
         txtCari.setText("");
