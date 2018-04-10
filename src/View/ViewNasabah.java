@@ -31,7 +31,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
         initComponents();
         datas = new ArrayList<>();
         nn = new NasabahController();
-        nn.bindingAll(tblNasabah, header);
+        datas = nn.bindingAll(tblNasabah, header);
         nn.loadAdmin(cmbIdAdmin);
         reset();
     }
@@ -335,6 +335,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
                 txtPenghasilan.getText(),
                 txtAlamat.getText(),
                 cmbIdAdmin.getSelectedItem().toString());
+            datas = nn.bindingAll(tblNasabah, header);
         }
         else {
             hasil = nn.insert(
@@ -347,6 +348,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
                 txtPenghasilan.getText(),
                 txtAlamat.getText(),
                 cmbIdAdmin.getSelectedItem().toString());
+            datas = nn.bindingAll(tblNasabah, header);
         }
         txtKTP.setEnabled(true);
         btnSimpan.setEnabled(true);
