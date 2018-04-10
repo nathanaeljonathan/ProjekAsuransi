@@ -9,6 +9,7 @@ import dao.AdminDao;
 import dao.NasabahDao;
 import entities.Admin;
 import entities.Nasabah;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -27,16 +28,15 @@ public class NasabahController {
         this.ad = new AdminDao();
     }
     
-    private void bindingTabels(JTable table, String[] header, List<Object> datas){
+    private List<String> bindingTabels(JTable table, String[] header, List<Object> datas){
+        List<String> dataAdmin = new ArrayList<>();
         DefaultTableModel model = new DefaultTableModel(header, 0);
         int i = 1;
 //        Nasabah na;
         for (Object data : datas){
             Nasabah na = (Nasabah) data;
-            String admin = "";
-            if (na.getIdAdmin() != null) {
-                admin = na.getIdAdmin().getNamaAdmin();
-            }
+            dataAdmin.add(" - ;" + na.getIdAdmin().getIdAdmin()
+                        + " - " + na.getIdAdmin().getNamaAdmin());
             Object[] data1 = {
                 i++,
                 na.getKtp(),
@@ -47,11 +47,12 @@ public class NasabahController {
                 na.getPekerjaan(),
                 na.getPenghasilan(),
                 na.getAlamat(),
-                na.getIdAdmin()
+                na.getIdAdmin().getNamaAdmin()
             };
             model.addRow(data1);
         }
         table.setModel(model);
+        return dataAdmin;
     }
     private void bindingTabelsReport(JTable table, String[] header, List<Object> datas){
         DefaultTableModel model = new DefaultTableModel(header, 0);
@@ -77,8 +78,9 @@ public class NasabahController {
         table.setModel(model);
     }
     
-    public void bindingAll(JTable table, String[] header) {
+    public List<String> bindingAll(JTable table, String[] header) {
         bindingTabels(table, header, nd.getAll());
+        return bindingTabels(table, header, nd.getAll());
     }
     public void bindingAllReport(JTable table, String[] header) {
         bindingTabelsReport(table, header, nd.getAll());
@@ -120,14 +122,14 @@ public class NasabahController {
         return nd.getAll();
     }
 
-    public void bindingSearch(JTable table, String[] header, String category, String cari) {
+    public List<String> bindingSearch(JTable table, String[] header, String category, String cari) {
         String search = cari;
         if (category.equalsIgnoreCase("idAdmin")) {
             Admin a = (Admin) ad.search("namaAdmin", cari).get(0);
             search = a.getIdAdmin().toString();
         }        bindingTabels(table, header, nd.search(category, search));
 
-        bindingTabels(table, header, nd.search(category, search));
+        return bindingTabels(table, header, nd.search(category, search));
     }
     public void bindingSearchReport(JTable table, String[] header, String category, String cari) {
         String search = cari;
@@ -146,7 +148,8 @@ public class NasabahController {
     public void loadAdmin(JComboBox jComboBox) {
         jComboBox.addItem(" - ");
         ad.getAll().stream().map((object) -> (Admin) object).forEachOrdered((admin) -> {
-            jComboBox.addItem(admin.getIdAdmin());
+            jComboBox.addItem(admin.getIdAdmin() + " - "
+                    + admin.getNamaAdmin());
         });
     }
 }

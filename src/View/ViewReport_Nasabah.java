@@ -147,7 +147,7 @@ public class ViewReport_Nasabah extends javax.swing.JInternalFrame {
             String driver="oracle.jdbc.OracleDriver";
             String konek="jdbc:oracle:thin:@localhost:1521:XE";
             String user="system";
-            String password="21051996";
+            String password="0000";
             HashMap parameter = new HashMap();
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(konek,user,password);

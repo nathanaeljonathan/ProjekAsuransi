@@ -44,7 +44,7 @@ public class PembayaranDao implements InterfaceDao{
 
     @Override
     public List<Object> getAll() {
-        return fdao.getAll("FROM Pembayaran");
+        return fdao.getAll("FROM Pembayaran ORDER BY No_Pembayaran");
     }
 
     @Override

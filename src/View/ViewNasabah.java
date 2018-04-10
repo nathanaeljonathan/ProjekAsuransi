@@ -6,6 +6,9 @@
 package View;
 
 import controller.NasabahController;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,16 +21,19 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     private String headerTable[] = {"ktp","noPolis","nmNasabah","tglLahir","status",
         "pekerjaan","penghasilan","alamat","idAdmin"};
     public NasabahController nn;
-    private boolean hasil;
+//    private boolean hasil;
+    private List<String> datas; 
 
     /**
      * Creates new form ViewNasabah
      */
     public ViewNasabah() {
         initComponents();
+        datas = new ArrayList<>();
         nn = new NasabahController();
         nn.bindingAll(tblNasabah, header);
-//        nn.loadAdmin(cmbIdAdmin);
+        nn.loadAdmin(cmbIdAdmin);
+        reset();
     }
 
     /**
@@ -126,7 +132,6 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
 
         lblNoPolis.setText("No Polis");
 
-        cmbIdAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADM01", "ADM02", "ADM03" }));
         cmbIdAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbIdAdminActionPerformed(evt);
@@ -369,15 +374,16 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void tblNasabahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNasabahMouseClicked
-       txtKTP.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 1)+"");
+       int row = tblNasabah.getSelectedRow();
+        txtKTP.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 1)+"");
        txtNoPolis.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 2)+"");
        txtNamaNasabah.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 3)+"");
-//       txtTglLahir.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 4)+"");
+       txtTglLahir.setDate((Date) tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 4));
        cmbStatus.setSelectedItem(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 5)+"");
        txtPekerjaan.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 6)+"");
        txtPenghasilan.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 7)+"");
        txtAlamat.setText(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 8)+"");
-       cmbIdAdmin.setSelectedItem(tblNasabah.getValueAt(tblNasabah.getSelectedRow(), 9)+"");
+       cmbIdAdmin.setSelectedItem(getCombo(true).get(row));
        txtKTP.setEnabled(false);
        btnSimpan.setEnabled(true);
        btnHapus.setEnabled(true);
@@ -398,23 +404,10 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbStatusActionPerformed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        String kolom = "";
-        if (rootPaneCheckingEnabled) {
-            
-        }
-        switch(cmbKategori.getSelectedIndex()){
-            case 0:
-            kolom = "ktp";
-            break;
-            case 1:
-            kolom = "noPolis";
-            break;
-            case 2:
-            kolom = "nmNasabah";
-            break;
-        }
-        nn.bindingSearch(tblNasabah, header, kolom, txtCari.getText());
-        System.out.println(cmbKategori.getSelectedItem()+"");
+        datas = new ArrayList<>(); 
+        datas = nn.bindingSearch(tblNasabah, header, 
+                headerTable[cmbKategori.getSelectedIndex()], 
+                txtCari.getText());
     }//GEN-LAST:event_btnCariActionPerformed
 
 
@@ -447,19 +440,30 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser txtTglLahir;
     // End of variables declaration//GEN-END:variables
 
-public void reset(){
+private void reset(){
         txtKTP.setText("");
         txtNamaNasabah.setText("");
         txtNoPolis.setText("");
         txtAlamat.setText("");
         txtPekerjaan.setText("");
         txtPenghasilan.setText("");
-        txtTglLahir.getDate().getTime();
+//        txtTglLahir.getDate().getTime();
         cmbIdAdmin.setSelectedIndex(0);
         cmbStatus.setSelectedIndex(0);
         txtCari.setText("");
         btnSimpan.setEnabled(false);
         btnHapus.setEnabled(false); 
         txtKTP.setEnabled(true);
+    }
+
+    private List<String> getCombo(boolean isAdmin){
+        List<String> isi = new ArrayList<>();
+        String[] daftar = new String[datas.size()];
+        for (String data : datas) {
+            daftar = data.split(";");
+            if (isAdmin) isi.add(daftar[1]);
+            else isi.add(daftar[0]);
+        }
+        return isi;
     }
 }

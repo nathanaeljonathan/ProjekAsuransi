@@ -11,7 +11,9 @@ import dao.PembayaranDao;
 import entities.Asuransi;
 import entities.Nasabah;
 import entities.Pembayaran;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,19 +32,19 @@ public class PembayaranController {
         this.ad = new AsuransiDao();
     }
 
-    public void bindingAll(JTable table, String[] header){
+    public List<String> bindingAll(JTable table, String[] header){
         bindingTable(table, header,pd.getAll());
+        return bindingTable(table, header, pd.getAll());
     }
     
-    private void bindingTable(JTable table, String[] header, List<Object> datas) {
+    private List<String> bindingTable(JTable table, String[] header, List<Object> datas) {
+        List<String> dataAsuransi = new ArrayList<>();
         DefaultTableModel model = new DefaultTableModel(header, 0);
         int i = 1;
         for (Object data : datas) {
             Pembayaran pm = (Pembayaran) data;
-            String nasabah = "";
-            if (pm.getNoPolis() != null) {
-                nasabah = pm.getNoPolis().toString();
-            }
+            dataAsuransi.add(" - ;" + pm.getIdAsuransi().getIdAsuransi()
+                        + " - " + pm.getIdAsuransi().getNmAsuransi());
             Object[] data1 = {
                 i++,
                 pm.getNoPembayaran(),
@@ -54,6 +56,7 @@ public class PembayaranController {
             model.addRow(data1);
         }
         table.setModel(model);
+        return dataAsuransi;
     }
 
     public boolean insert(String noPembayaran, String noPolis, String tglPembayaran, String jumlahBayar, String idAsuransi) {
@@ -62,7 +65,8 @@ public class PembayaranController {
        p.setNoPolis(new Nasabah(noPolis));
        p.setTglPembayaran(new java.sql.Date(new Long(tglPembayaran)));
        p.setJumlahBayar(jumlahBayar);
-       p.setIdAsuransi(new Asuransi(idAsuransi));
+       String[] Aid = idAsuransi.split(" ");
+       p.setIdAsuransi((Asuransi) ad.getById(Aid[0]));
        return pd.insert(p);
     }
 
@@ -72,7 +76,8 @@ public class PembayaranController {
        p.setNoPolis(new Nasabah(noPolis));
        p.setTglPembayaran(new java.sql.Date(new Long(tglPembayaran)));
        p.setJumlahBayar(jumlahBayar);
-       p.setIdAsuransi(new Asuransi(idAsuransi));
+       String[] Aid = idAsuransi.split(" ");
+       p.setIdAsuransi((Asuransi) ad.getById(Aid[0]));
         return pd.update(p);
     }
 
@@ -84,7 +89,7 @@ public class PembayaranController {
         return pd.getAll();
     }
 
-    public void bindingSearch(JTable table, String[] header, String category, String cari) {
+    public List<String> bindingSearch(JTable table, String[] header, String category, String cari) {
        String search = cari;
         if (category.equalsIgnoreCase("noPolis")) {
             Nasabah nas = (Nasabah) nd.search("nmNasabah", cari).get(0);
@@ -95,7 +100,7 @@ public class PembayaranController {
             
             search = as.getIdAsuransi();
         }
-        bindingTable(table, header, pd.search(category, search));
+        return bindingTable(table, header, pd.search(category, search));
 
     }
     public void bindingSearchReport(JTable table, String[] header, String category, String cari) {
@@ -142,5 +147,13 @@ public class PembayaranController {
     
     public void bindingAllR(JTable table, String[] header){
         bindingTableReport(table, header,pd.getAll());
+    }
+    
+    public void loadAsuransi(JComboBox jComboBox) {
+        jComboBox.addItem(" - ");
+        ad.getAll().stream().map((object) -> (Asuransi) object).forEachOrdered((asuransi) -> {
+            jComboBox.addItem(asuransi.getIdAsuransi()+ " - "
+                    + asuransi.getNmAsuransi());
+        });
     }
 }

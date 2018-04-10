@@ -6,6 +6,9 @@
 package View;
 
 import controller.PembayaranController;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,15 +19,19 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     private String header[] = {"NO","No Pembayaran","Tgl Pembayaran","Jumlah Pembayaran", "No Polis","Asuransi"};
     private String headerTable[] = {"NO_PEMBAYARAN","NO_POLIS","ID_ASURANSI"};
     public PembayaranController pc;
-    private boolean hasil;
+//    private boolean hasil;
+    private List<String> datas;
 
     /**
      * Creates new form ViewPembayaran
      */
     public ViewPembayaran() {
         initComponents();
+        datas = new ArrayList<>();
         pc = new PembayaranController();
-        pc.bindingAll(tblPembayaran, header);
+        datas = pc.bindingAll(tblPembayaran, header);
+        pc.loadAsuransi(cmbAsuransi);
+        reset();
     }
 
     /**
@@ -96,7 +103,6 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbAsuransi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASR01", "ASR02", "ASR03", "ASR04" }));
         cmbAsuransi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAsuransiActionPerformed(evt);
@@ -271,11 +277,12 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void tblPembayaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPembayaranMouseClicked
-       txtPembayaran.setText(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 1)+"");
-//       txtTglBayar.setDate(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 2)+"");
+      int row = tblPembayaran.getSelectedRow();
+        txtPembayaran.setText(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 1)+"");
+       txtTglBayar.setDate((Date) tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 2));
        txtJmlPembayaran.setText(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 3)+"");
        txtNoPolis.setText(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 4)+"");
-       cmbAsuransi.setSelectedItem(tblPembayaran.getValueAt(tblPembayaran.getSelectedRow(), 5)+"");
+       cmbAsuransi.setSelectedItem(getCombo(true).get(row));
        txtPembayaran.setEnabled(false);
        btnSimpan.setEnabled(true);
     }//GEN-LAST:event_tblPembayaranMouseClicked
@@ -293,7 +300,8 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPembayaranKeyPressed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-         pc.bindingSearch(tblPembayaran, header, 
+        datas = new ArrayList<>(); 
+        datas = pc.bindingSearch(tblPembayaran, header, 
                 headerTable[cmbKategori.getSelectedIndex()], 
                 txtCari.getText());
     }//GEN-LAST:event_btnCariActionPerformed
@@ -323,14 +331,25 @@ public class ViewPembayaran extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser txtTglBayar;
     // End of variables declaration//GEN-END:variables
 
-public void reset(){
+private void reset(){
         txtPembayaran.setText("");
         txtNoPolis.setText("");
-        txtTglBayar.getDate().getTime();
+//        txtTglBayar.getDate().getTime();
         txtJmlPembayaran.setText("");
         cmbAsuransi.setSelectedIndex(0);
         txtCari.setText("");
         btnSimpan.setEnabled(false);
         txtPembayaran.setEnabled(true);
+    }
+
+    private List<String> getCombo(boolean isAsuransi){
+        List<String> isi = new ArrayList<>();
+        String[] daftar = new String[datas.size()];
+        for (String data : datas) {
+            daftar = data.split(";");
+            if (isAsuransi) isi.add(daftar[1]);
+            else isi.add(daftar[0]);
+        }
+        return isi;
     }
 }
