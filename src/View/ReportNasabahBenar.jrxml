@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="polis" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      ADMIN."ID_ADMIN" AS ADMIN_ID_ADMIN,
@@ -19,7 +22,7 @@ FROM
 	<field name="ADMIN_ID_ADMIN" class="java.lang.String"/>
 	<field name="ADMIN_NAMA_ADMIN" class="java.lang.String"/>
 	<field name="NASABAH_KTP" class="java.lang.String"/>
-	<field name="NASABAH_NO_POLIS" class="java.math.BigDecimal"/>
+	<field name="NASABAH_NO_POLIS" class="java.lang.String"/>
 	<field name="NASABAH_ID_ADMIN" class="java.lang.String"/>
 	<field name="NASABAH_NM_NASABAH" class="java.lang.String"/>
 	<field name="NASABAH_PEKERJAAN" class="java.lang.String"/>
@@ -36,10 +39,6 @@ FROM
 				</textElement>
 				<text><![CDATA[LAPORAN NASABAH]]></text>
 			</staticText>
-			<image>
-				<reportElement x="9" y="6" width="106" height="49" uuid="dfd37152-ffe5-45ce-865e-589cd81bca22"/>
-				<imageExpression><![CDATA["C:\\Users\\ASUS A455L\\Downloads\\asuransi-prudential.jpg"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>

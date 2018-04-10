@@ -348,7 +348,12 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
                 txtPenghasilan.getText(),
                 txtAlamat.getText(),
                 cmbIdAdmin.getSelectedItem().toString());
-            datas = nn.bindingAll(tblNasabah, header);
+            datas = nn.bindingAll(tblNasabah, header);            
+        }
+        if (txtKTP.isEnabled()) {
+            ViewPembayaran as = new ViewPembayaran();
+             this.getParent().add(as);
+            as.setVisible(true);
         }
         txtKTP.setEnabled(true);
         btnSimpan.setEnabled(true);

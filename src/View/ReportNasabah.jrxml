@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="polis" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      ASURANSI."ID_ASURANSI" AS ASURANSI_ID_ASURANSI,
@@ -39,7 +42,7 @@ FROM
 	<field name="ADMIN_NO_TELP" class="java.lang.String"/>
 	<field name="ADMIN_EMAIL" class="java.lang.String"/>
 	<field name="NASABAH_KTP" class="java.lang.String"/>
-	<field name="NASABAH_NO_POLIS" class="java.math.BigDecimal"/>
+	<field name="NASABAH_NO_POLIS" class="java.lang.String"/>
 	<field name="NASABAH_ID_ADMIN" class="java.lang.String"/>
 	<field name="NASABAH_NM_NASABAH" class="java.lang.String"/>
 	<field name="NASABAH_TGL_LAHIR" class="java.sql.Timestamp"/>
@@ -50,7 +53,7 @@ FROM
 	<field name="PEMBAYARAN_NO_PEMBAYARAN" class="java.lang.String"/>
 	<field name="PEMBAYARAN_TGL_PEMBAYARAN" class="java.sql.Timestamp"/>
 	<field name="PEMBAYARAN_JUMLAH_BAYAR" class="java.lang.String"/>
-	<field name="PEMBAYARAN_NO_POLIS" class="java.math.BigDecimal"/>
+	<field name="PEMBAYARAN_NO_POLIS" class="java.lang.String"/>
 	<field name="PEMBAYARAN_ID_ASURANSI" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -58,7 +61,7 @@ FROM
 	<title>
 		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="116" y="8" width="340" height="40" uuid="40c9f217-a42d-402b-a834-306ef9bb98e4"/>
+				<reportElement x="115" y="9" width="340" height="40" uuid="40c9f217-a42d-402b-a834-306ef9bb98e4"/>
 				<textElement>
 					<font fontName="MS UI Gothic" size="30" isBold="true" isUnderline="true"/>
 				</textElement>

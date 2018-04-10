@@ -14,6 +14,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -154,13 +155,18 @@ public class ViewReport_Transaksi extends javax.swing.JInternalFrame {
             File reportFile=new File(path);
             InputStream jReport = this.getClass().getClassLoader().getResourceAsStream(reportFile.getPath());
 //            JasperReport jReport = (JasperReport) JRLoader.loadObjectFromFile(reportFile.getPath());
-            JasperPrint jPrint = JasperFillManager.fillReport(jReport, parameter, conn);
+//            JasperPrint jPrint = JasperFillManager.fillReport(jReport, parameter, conn);
+            JasperPrint jp = JasperFillManager.fillReport(jReport, parameter, conn);
 //            JasperViewer.viewReport(jPrint, true);
-            JasperViewer viewer = new JasperViewer(jPrint);
-            JasperViewer.setDefaultLookAndFeelDecorated(true);
+//            JasperViewer viewer = new JasperViewer(jPrint);
+//            JasperViewer.setDefaultLookAndFeelDecorated(true);
 //            cr.add(viewer);
 //            cr.show();
-            viewer.setVisible(true);
+            JRViewer jViewer = new JRViewer (jp);
+            jViewer.setVisible(true);
+            jViewer.setOpaque(true);
+            jScrollPane1.add(jViewer);
+            jScrollPane1.setViewportView(jViewer);
 //            Desktop.add(viewer);
 //            cr.setEnabled(true);
         } catch (Exception e) {
