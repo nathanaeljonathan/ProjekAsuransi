@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c5456e8-cadf-46b1-a6d2-f00e51524af8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="polis" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     ASURANSI."ID_ASURANSI" AS ASURANSI_ID_ASURANSI,
+     ASURANSI."NM_ASURANSI" AS ASURANSI_NM_ASURANSI,
+     ADMIN."ID_ADMIN" AS ADMIN_ID_ADMIN,
+     ADMIN."NAMA_ADMIN" AS ADMIN_NAMA_ADMIN,
+     ADMIN."ALAMAT" AS ADMIN_ALAMAT,
+     ADMIN."NO_TELP" AS ADMIN_NO_TELP,
+     ADMIN."EMAIL" AS ADMIN_EMAIL,
+     NASABAH."KTP" AS NASABAH_KTP,
+     NASABAH."NO_POLIS" AS NASABAH_NO_POLIS,
+     NASABAH."ID_ADMIN" AS NASABAH_ID_ADMIN,
+     NASABAH."NM_NASABAH" AS NASABAH_NM_NASABAH,
+     NASABAH."TGL_LAHIR" AS NASABAH_TGL_LAHIR,
+     NASABAH."STATUS" AS NASABAH_STATUS,
+     NASABAH."PEKERJAAN" AS NASABAH_PEKERJAAN,
+     NASABAH."PENGHASILAN" AS NASABAH_PENGHASILAN,
+     NASABAH."ALAMAT" AS NASABAH_ALAMAT,
+     PEMBAYARAN."NO_PEMBAYARAN" AS PEMBAYARAN_NO_PEMBAYARAN,
+     PEMBAYARAN."TGL_PEMBAYARAN" AS PEMBAYARAN_TGL_PEMBAYARAN,
+     PEMBAYARAN."JUMLAH_BAYAR" AS PEMBAYARAN_JUMLAH_BAYAR,
+     PEMBAYARAN."NO_POLIS" AS PEMBAYARAN_NO_POLIS,
+     PEMBAYARAN."ID_ASURANSI" AS PEMBAYARAN_ID_ASURANSI
+FROM
+     "HR"."ADMIN" ADMIN INNER JOIN "HR"."NASABAH" NASABAH ON ADMIN."ID_ADMIN" = NASABAH."ID_ADMIN"
+     INNER JOIN "HR"."PEMBAYARAN" PEMBAYARAN ON NASABAH."NO_POLIS" = PEMBAYARAN."NO_POLIS"
+     INNER JOIN "HR"."ASURANSI" ASURANSI ON PEMBAYARAN."ID_ASURANSI" = ASURANSI."ID_ASURANSI"
+
+WHERE
+NASABAH."NO_POLIS" = $P{polis}]]>
+	</queryString>
+	<field name="ASURANSI_ID_ASURANSI" class="java.lang.String"/>
+	<field name="ASURANSI_NM_ASURANSI" class="java.lang.String"/>
+	<field name="ADMIN_ID_ADMIN" class="java.lang.String"/>
+	<field name="ADMIN_NAMA_ADMIN" class="java.lang.String"/>
+	<field name="ADMIN_ALAMAT" class="java.lang.String"/>
+	<field name="ADMIN_NO_TELP" class="java.lang.String"/>
+	<field name="ADMIN_EMAIL" class="java.lang.String"/>
+	<field name="NASABAH_KTP" class="java.lang.String"/>
+	<field name="NASABAH_NO_POLIS" class="java.math.BigDecimal"/>
+	<field name="NASABAH_ID_ADMIN" class="java.lang.String"/>
+	<field name="NASABAH_NM_NASABAH" class="java.lang.String"/>
+	<field name="NASABAH_TGL_LAHIR" class="java.sql.Timestamp"/>
+	<field name="NASABAH_STATUS" class="java.lang.String"/>
+	<field name="NASABAH_PEKERJAAN" class="java.lang.String"/>
+	<field name="NASABAH_PENGHASILAN" class="java.lang.String"/>
+	<field name="NASABAH_ALAMAT" class="java.lang.String"/>
+	<field name="PEMBAYARAN_NO_PEMBAYARAN" class="java.lang.String"/>
+	<field name="PEMBAYARAN_TGL_PEMBAYARAN" class="java.sql.Timestamp"/>
+	<field name="PEMBAYARAN_JUMLAH_BAYAR" class="java.lang.String"/>
+	<field name="PEMBAYARAN_NO_POLIS" class="java.math.BigDecimal"/>
+	<field name="PEMBAYARAN_ID_ASURANSI" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="115" y="9" width="340" height="40" uuid="40c9f217-a42d-402b-a834-306ef9bb98e4"/>
+				<textElement>
+					<font fontName="MS UI Gothic" size="30" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN TRANSAKSI]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="7cca330e-4679-40b8-81d6-9eae4df096f4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="207" y="0" width="77" height="20" uuid="67a00e2f-ca32-4f66-bab0-368c5bdb530f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Jumlah Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="0" width="61" height="20" uuid="8ee9e587-6dca-4065-a00c-1065f11fd8fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[No Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="0" width="53" height="20" uuid="dcb6e6a5-83b0-47c6-a110-4fb027f0ff86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[No Polis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="0" width="91" height="20" uuid="fb347b6d-a71b-402c-a4aa-7f65d15aa0b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Nama Nasabah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="1" width="141" height="20" uuid="b2c65e68-c84f-4550-b8f6-b19fcaa25269"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Asuransi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="0" width="130" height="20" uuid="ef3fe125-2d8e-4d82-a5e0-6cbf13655dd9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Pembayaran]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="63" height="20" uuid="c7f837aa-d62b-4bd3-a852-56e5fa2cd8bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PEMBAYARAN_NO_PEMBAYARAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="0" width="91" height="20" uuid="1a6a3ffb-dc1d-4a79-a222-15eb0518ad08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_NM_NASABAH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="207" y="0" width="77" height="20" uuid="84d03bb9-d1b0-4dde-94ff-16a70b7cec6f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PEMBAYARAN_JUMLAH_BAYAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="1" width="141" height="20" uuid="10fc1deb-f24e-4529-ba59-8d28d3c600b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ASURANSI_NM_ASURANSI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="1" width="130" height="20" uuid="39a4aa69-7936-4001-8e15-b265f21fb9ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PEMBAYARAN_TGL_PEMBAYARAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="53" height="20" uuid="85561828-03c8-4316-8c8f-1d10e8b39276"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_NO_POLIS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="0" width="80" height="20" uuid="e5c717bf-c3f1-42b9-8f2b-e10eb2a68ff1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="0" width="40" height="20" uuid="08ba9ac0-1751-4eeb-b669-4d9ac8959c88"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

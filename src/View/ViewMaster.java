@@ -48,7 +48,7 @@ public class ViewMaster extends javax.swing.JFrame {
         PaneAsuransi.setLayout(PaneAsuransiLayout);
         PaneAsuransiLayout.setHorizontalGroup(
             PaneAsuransiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 782, Short.MAX_VALUE)
+            .addGap(0, 1060, Short.MAX_VALUE)
         );
         PaneAsuransiLayout.setVerticalGroup(
             PaneAsuransiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

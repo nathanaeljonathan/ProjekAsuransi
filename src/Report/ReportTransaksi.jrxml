@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7554b352-02b3-48a5-b1ac-15999cf20e2f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="polis" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="admin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     ADMIN."ID_ADMIN" AS ADMIN_ID_ADMIN,
+     ADMIN."NAMA_ADMIN" AS ADMIN_NAMA_ADMIN,
+     NASABAH."KTP" AS NASABAH_KTP,
+     NASABAH."NO_POLIS" AS NASABAH_NO_POLIS,
+     NASABAH."ID_ADMIN" AS NASABAH_ID_ADMIN,
+     NASABAH."NM_NASABAH" AS NASABAH_NM_NASABAH,
+     NASABAH."PEKERJAAN" AS NASABAH_PEKERJAAN,
+     NASABAH."ALAMAT" AS NASABAH_ALAMAT
+FROM
+     "HR"."NASABAH" NASABAH INNER JOIN "HR"."ADMIN" ADMIN ON NASABAH."ID_ADMIN" = ADMIN."ID_ADMIN"
+
+WHERE
+ADMIN."NAMA_ADMIN" = $P{admin} or
+NASABAH."NO_POLIS" = $P{polis}]]>
+	</queryString>
+	<field name="ADMIN_ID_ADMIN" class="java.lang.String"/>
+	<field name="ADMIN_NAMA_ADMIN" class="java.lang.String"/>
+	<field name="NASABAH_KTP" class="java.lang.String"/>
+	<field name="NASABAH_NO_POLIS" class="java.math.BigDecimal"/>
+	<field name="NASABAH_ID_ADMIN" class="java.lang.String"/>
+	<field name="NASABAH_NM_NASABAH" class="java.lang.String"/>
+	<field name="NASABAH_PEKERJAAN" class="java.lang.String"/>
+	<field name="NASABAH_ALAMAT" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="136" y="11" width="306" height="40" uuid="e94db09f-e2a7-4abf-b0a5-6084eec2db7c"/>
+				<textElement>
+					<font fontName="MS UI Gothic" size="30" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN NASABAH]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="442" y="5" width="100" height="20" uuid="71bee0d8-6e6b-4abc-913c-62003ebf7cd6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="100" height="20" uuid="a24b3f9a-8476-4b13-8692-4a46ad8fbde2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[KTP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="4" width="56" height="20" uuid="0cb38cb2-2093-412f-bb33-24e1a535f43f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[No Polis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="4" width="100" height="20" uuid="f45715b8-39ec-4bb3-8dca-f1798d05c9da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="4" width="112" height="20" uuid="0401a9f9-edbf-40d2-9317-c40356293fdb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="4" width="108" height="20" uuid="398be4e3-4cf1-4b9d-b856-975b3e32f84c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Pekerjaan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="4" width="80" height="20" uuid="97d1d42b-a0eb-406d-b351-3ee180ec0c09"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Admin]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement x="0" y="0" width="100" height="20" uuid="9eef4505-b9b1-4207-9dcf-6749a3dae334"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_KTP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="55" height="20" uuid="697a47e5-dcdc-4496-856e-182a40e6c316"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_NO_POLIS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="0" width="100" height="20" uuid="ed4c984e-4090-4986-8734-1dc948f6724f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_NM_NASABAH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="0" width="112" height="20" uuid="922baa93-6723-40d8-8058-3d37aaa1f878"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_ALAMAT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="80" height="20" uuid="55a75dd5-be2c-44b2-a626-9d6abb96443f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ADMIN_NAMA_ADMIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="0" width="108" height="20" uuid="5d1879fc-d5ca-46f3-ae60-9ff7b2bdbe91"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NASABAH_PEKERJAAN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
