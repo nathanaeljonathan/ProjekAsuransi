@@ -71,6 +71,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
         btnCari = new javax.swing.JButton();
         txtCari = new javax.swing.JTextField();
         cmbKategori = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -251,7 +252,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
                         .addGroup(pnlNasabahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbIdAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 57, Short.MAX_VALUE))))
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
 
         tblNasabah.setModel(new javax.swing.table.DefaultTableModel(
@@ -277,7 +278,10 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KTP", "No Polis", "Nama Nasabah" }));
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KTP", "No Polis", "Admin" }));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setText("------DATA NASABAH------");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -296,6 +300,10 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(203, 203, 203))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,9 +313,11 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
                     .addComponent(btnCari)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(pnlNasabah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -425,6 +435,7 @@ public class ViewNasabah extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbIdAdmin;
     private javax.swing.JComboBox<String> cmbKategori;
     private javax.swing.JComboBox<String> cmbStatus;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label lblAlamat;
     private java.awt.Label lblIdAdmin;
